@@ -1,1 +1,1716 @@
-<script language=javascript>document.write(unescape('function%20serializeFormObject%28%24form%29%20%7B%0A%20%20%20%20var%20unindexed_array%20%3D%20%24form.serializeArray%28%29%3B%0A%20%20%20%20var%20indexed_array%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%24.map%28unindexed_array%2C%20function%20%28n%2C%20i%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28n%5B%27name%27%5D.indexOf%28%27%5B%5D%27%29%20%3E%3D%200%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28empty%28indexed_array%5Bn%5B%27name%27%5D%5D%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20indexed_array%5Bn%5B%27name%27%5D%5D%20%3D%20new%20Array%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20indexed_array%5Bn%5B%27name%27%5D%5D.push%28n%5B%27value%27%5D%29%3B%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20indexed_array%5Bn%5B%27name%27%5D%5D%20%3D%20n%5B%27value%27%5D%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20return%20indexed_array%3B%0A%7D%0A%0Afunction%20empty%28mixed_var%29%20%7B%0A%20%20%20%20//%20Checks%20if%20the%20argument%20variable%20is%20empty%0A%20%20%20%20//%20undefined%2C%20null%2C%20false%2C%20number%200%2C%20empty%20string%2C%0A%20%20%20%20//%20string%20%220%22%2C%20objects%20without%20properties%20and%20empty%20arrays%0A%20%20%20%20//%20are%20considered%20empty%0A%20%20%20%20var%20undef%2C%20key%2C%20i%2C%20len%3B%0A%20%20%20%20var%20emptyValues%20%3D%20%5Bundef%2C%20undefined%2C%20null%2C%20false%2C%200%2C%20%22%22%2C%20%220%22%5D%3B%0A%0A%20%20%20%20for%20%28i%20%3D%200%2C%20len%20%3D%20emptyValues.length%3B%20i%20%3C%20len%3B%20i++%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28mixed_var%20%3D%3D%3D%20emptyValues%5Bi%5D%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20true%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20if%20%28typeof%20mixed_var%20%3D%3D%3D%20%22object%22%29%20%7B%0A%20%20%20%20%20%20%20%20for%20%28key%20in%20mixed_var%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20//%20TODO%3A%20should%20we%20check%20for%20own%20properties%20only%3F%0A%20%20%20%20%20%20%20%20%20%20%20%20//if%20%28mixed_var.hasOwnProperty%28key%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20//%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20return%20true%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%20false%3B%0A%7D%0A%0A%0A%24%28document%29.ready%28function%20%28%29%20%7B%0A%20%20%20%20//%20if%28readCookieData%28%22qr-sb%22%29%20%3D%3D%20true%29%7B%0A%20%20%20%20//%20%20%20%24%28%27%23sidebar%27%29.removeClass%28%27active%27%29%3B%0A%20%20%20%20//%20%20%20%24%28%27.fixnav%27%29.removeClass%28%27left_nav_hide%27%29%3B%0A%20%20%20%20//%20%7Delse%7B%0A%20%20%20%20//%20%20%20%24%28%27%23sidebar%27%29.addClass%28%27active%27%29%3B%0A%20%20%20%20//%20%20%20%24%28%27.fixnav%27%29.addClass%28%27left_nav_hide%27%29%3B%0A%20%20%20%20//%20%7D%0A%20%20%20%20//%20%24%28%27%23sidebarCollapse%27%29.on%28%27click%27%2C%20function%20%28%29%20%7B%0A%20%20%20%20//%20%09%24%28%27%23sidebar%27%29.toggleClass%28%27active%27%29%3B%0A%20%20%20%20//%20%09%24%28%27.fixnav%27%29.toggleClass%28%27left_nav_hide%27%29%3B%0A%20%20%20%20//%20%09if%20%28%24%28%27%23sidebar%27%29.hasClass%28%27active%27%29%29%20%7B%0A%20%20%20%20//%20%09%09%24%28%22%23sidebarCollapse%22%29.removeClass%28%22icon-cross%22%29%0A%20%20%20%20//%20%09%09%24%28%22%23sidebarCollapse%22%29.addClass%28%22icon-menu%22%29%0A%20%20%20%20//%20%09%09setCookieData%28%22sb%22%2C%20%271%27%2C%20365%29%0A%20%20%20%20//%20%09%09%24%28%22.qr_code_logo_click%22%29.attr%28%22src%22%2C%20%22/assets/images/qrcode-chimp.svg%22%29%0A%20%20%20%20//%20%09%09%24%28%22.qr_code_logo_click%22%29.show%28%29%0A%0A%20%20%20%20//%20%09%7D%20else%20%7B%0A%20%20%20%20//%20%09%09%24%28%22%23sidebarCollapse%22%29.removeClass%28%22icon-menu%22%29%0A%20%20%20%20//%20%09%09%24%28%22%23sidebarCollapse%22%29.addClass%28%22icon-cross%22%29%0A%20%20%20%20//%20%09%09%24%28%22.qr_code_logo_click%22%29.hide%28%29%0A%0A%20%20%20%20//%20%09%09setCookieData%28%22sb%22%2C%20%270%27%2C%20365%29%0A%20%20%20%20//%20%09%7D%0A%20%20%20%20//%20%7D%29%3B%0A%0A%20%20%20%20%24%28%27%23sidebarCollapse%20%2C%20.mobile_nav_close_side%27%29.on%28%27click%27%2C%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20%24%28%27.fixnav%27%29.toggleClass%28%27left_nav_show%27%29%3B%0A%20%20%20%20%7D%29%0A%0A%20%20%20%20%24%28%22.qr_code_logo_click%22%29.on%28%22click%22%2C%20function%20%28e%29%20%7B%0A%20%20%20%20%20%20%20%20location.href%20%3D%20%27https%3A//www.qrcodechimp.com%27%0A%20%20%20%20%7D%29%0A%0A%20%20%20%20%24%28%22.account_limit_exhaust_form%22%29.on%28%22submit%22%2C%20function%20%28e%29%20%7B%0A%20%20%20%20%20%20%20%20e.preventDefault%28%29%0A%20%20%20%20%20%20%20%20const%20data%20%3D%20serializeFormObject%28%24%28this%29%29%0A%20%20%20%20%20%20%20%20%24.post%28%22//%22%20+%20__api_domain%20+%20%27/user/services/openapi%27%2C%20data%2C%20function%20%28response%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21empty%28response.data%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.thank_you%27%29.removeClass%28%22d-none%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.account_limit_exhaust_form_wrapper%27%29.addClass%28%22d-none%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%7D%29%0A%7D%29%3B%0A%0Afunction%20readCookieData%28name%29%20%7B%0A%20%20%20%20var%20data%20%3D%20readCookie%28name%29%3B%0A%20%20%20%20//alert%28data%29%3B%0A%20%20%20%20if%20%28data%20%21%3D%20null%29%20%7B%0A%20%20%20%20%20%20%20%20data%20%3D%20decodeURIComponent%28data%29%3B%0A%20%20%20%20%20%20%20%20var%20dArr%20%3D%20data.split%28%27%26%27%29%3B%0A%20%20%20%20%20%20%20%20data%20%3D%20%7B%7D%3B%0A%20%20%20%20%20%20%20%20for%20%28var%20i%20%3D%200%3B%20i%20%3C%20dArr.length%3B%20++i%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20//alert%28dArr%5Bi%5D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20vals%20%3D%20dArr%5Bi%5D.split%28%27%3D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28vals.length%20%3E%201%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20data%5BdecodeURIComponent%28vals%5B0%5D%29%5D%20%3D%20decodeURIComponent%28vals%5B1%5D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20else%20if%20%28vals.length%20%3D%3D%201%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20data%5BdecodeURIComponent%28vals%5B0%5D%29%5D%20%3D%20%27%27%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20data%20%3D%20%7B%7D%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20data%3B%0A%7D%0A%0Afunction%20setCookieData%28name%2C%20data%2C%20days%29%20%7B%0A%20%20%20%20createCookie%28name%2C%20encodeURIComponent%28data%29%2C%20days%29%3B%0A%7D%0A%0A%0Afunction%20set_cookie%28name%2C%20value%2C%20exp_y%2C%20exp_m%2C%20exp_d%2C%20path%2C%20domain%2C%20secure%29%20%7B%0A%20%20%20%20var%20cookie_string%20%3D%20name%20+%20%22%3D%22%20+%20escape%28value%29%3B%0A%20%20%20%20if%20%28exp_y%29%20%7B%0A%20%20%20%20%20%20%20%20var%20expires%20%3D%20new%20Date%28exp_y%2C%20exp_m%2C%20exp_d%29%3B%0A%20%20%20%20%20%20%20%20cookie_string%20+%3D%20%22%3B%20expires%3D%22%20+%20expires.toGMTString%28%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20if%20%28path%29%0A%20%20%20%20%20%20%20%20cookie_string%20+%3D%20%22%3B%20path%3D%22%20+%20escape%28path%29%3B%0A%20%20%20%20if%20%28domain%29%0A%20%20%20%20%20%20%20%20cookie_string%20+%3D%20%22%3B%20domain%3D%22%20+%20escape%28domain%29%3B%0A%20%20%20%20if%20%28secure%29%0A%20%20%20%20%20%20%20%20cookie_string%20+%3D%20%22%3B%20secure%22%3B%0A%20%20%20%20document.cookie%20%3D%20cookie_string%3B%0A%7D%0A%0Afunction%20createCookie%28name%2C%20value%2C%20days%29%20%7B%0A%20%20%20%20if%20%28days%29%20%7B%0A%20%20%20%20%20%20%20%20var%20date%20%3D%20new%20Date%28%29%3B%0A%20%20%20%20%20%20%20%20date.setTime%28date.getTime%28%29%20+%20%28days%20*%2024%20*%2060%20*%2060%20*%201000%29%29%3B%0A%20%20%20%20%20%20%20%20var%20expires%20%3D%20%22%3B%20expires%3D%22%20+%20date.toGMTString%28%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20else%20var%20expires%20%3D%20%22%22%3B%0A%20%20%20%20let%20prefix%20%3D%20%22qr-%22%3B%0A%20%20%20%20if%20%28isDev%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20+%3D%20%27DEV-%27%3B%0A%20%20%20%20%7D%20else%20if%20%28isLocal%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20+%3D%20%27LOCAL-%27%3B%0A%20%20%20%20%7D%20else%20if%20%28isStag%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20+%3D%20%27STAG-%27%3B%0A%20%20%20%20%7D%0A%20%20%20%20document.cookie%20%3D%20prefix%20+%20name%20+%20%22%3D%22%20+%20value%20+%20expires%20+%20%22%3B%20path%3D/%3B%20domain%3D.%22%20+%20location.host%3B%0A%7D%0A%0Afunction%20isProd%28%29%20%7B%0A%20%20%20%20return%20%21isLocal%28%29%20%26%26%20%21isDev%28%29%0A%7D%0A%0Afunction%20isDev%28%29%20%7B%0A%20%20%20%20const%20subdomain%20%3D%20location.host.split%28%27.%27%29%5B0%5D%0A%20%20%20%20return%20subdomain%20%3D%3D%20%27dev%27%20%7C%7C%20subdomain%20%3D%3D%20%27qd%27%20%7C%7C%20subdomain%20%3D%3D%20%27dev-dashboard%27%0A%7D%0A%0Afunction%20isStag%28%29%20%7B%0A%20%20%20%20const%20subdomain%20%3D%20location.host.split%28%27.%27%29%5B0%5D%0A%20%20%20%20return%20subdomain%20%3D%3D%20%27sm%27%20%7C%7C%20subdomain%20%3D%3D%20%27s%27%20%7C%7C%20subdomain%20%3D%3D%20%27s-dashboard%27%0A%7D%0A%0Afunction%20isLocal%28%29%20%7B%0A%20%20%20%20const%20subdomain%20%3D%20location.host.split%28%27.%27%29%5B0%5D%0A%20%20%20%20return%20subdomain%20%3D%3D%20%27l%27%20%7C%7C%20subdomain%20%3D%3D%20%27l-dashboard%27%0A%7D%0A%0A%0Afunction%20readCookie%28name%29%20%7B%0A%20%20%20%20let%20prefix%20%3D%20%22qr-%22%3B%0A%20%20%20%20if%20%28name%20%3D%3D%20%27qB%27%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20%3D%20%27%27%3B%0A%20%20%20%20%7Delse%20if%20%28isDev%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20+%3D%20%27DEV-%27%3B%0A%20%20%20%20%7D%20else%20if%20%28isLocal%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20+%3D%20%27LOCAL-%27%3B%0A%20%20%20%20%7D%20else%20if%20%28isStag%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20+%3D%20%27STAG-%27%3B%0A%20%20%20%20%7D%0A%20%20%20%20var%20nameEQ%20%3D%20prefix%20+%20name%20+%20%22%3D%22%3B%0A%20%20%20%20var%20ca%20%3D%20document.cookie.split%28%27%3B%27%29%3B%0A%20%20%20%20for%20%28var%20i%20%3D%200%3B%20i%20%3C%20ca.length%3B%20i++%29%20%7B%0A%20%20%20%20%20%20%20%20var%20c%20%3D%20ca%5Bi%5D%3B%0A%20%20%20%20%20%20%20%20while%20%28c.charAt%280%29%20%3D%3D%20%27%20%27%29%20c%20%3D%20c.substring%281%2C%20c.length%29%3B%0A%20%20%20%20%20%20%20%20if%20%28c.indexOf%28nameEQ%29%20%3D%3D%200%29%20return%20c.substring%28nameEQ.length%2C%20c.length%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20null%3B%0A%7D%0A%0Afunction%20eraseCookie%28name%29%20%7B%0A%0A%20%20%20%20createCookie%28name%2C%20%27%27%2C%200%29%3B%0A%0A%20%20%20%20let%20prefix%20%3D%20%22qr-%22%3B%0A%20%20%20%20if%20%28isDev%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20+%3D%20%27DEV-%27%3B%0A%20%20%20%20%7D%20else%20if%20%28isLocal%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20+%3D%20%27LOCAL-%27%3B%0A%20%20%20%20%7D%20else%20if%20%28isStag%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20prefix%20+%3D%20%27STAG-%27%3B%0A%20%20%20%20%7D%0A%20%20%20%20document.cookie%20%3D%20prefix%20+%20name%20+%20%27%3D%3Bmax-age%3D0%3Bpath%3D/%3Bexpires%3DThu%2C%2001%20Jan%201970%2000%3A00%3A01%20GMT%3Bdomain%3D.qrcodechimp.com%27%3B%0A%20%20%20%20document.cookie%20%3D%20prefix%20+%20name%20+%20%27%3D%3Bmax-age%3D0%3Bpath%3D/%3Bexpires%3DThu%2C%2001%20Jan%201970%2000%3A00%3A01%20GMT%3Bdomain%3D.www.qrcodechimp.com%27%3B%0A%20%20%20%20document.cookie%20%3D%20prefix%20+%20name%20+%20%27%3D%3Bmax-age%3D0%3Bpath%3D/%3Bexpires%3DThu%2C%2001%20Jan%201970%2000%3A00%3A01%20GMT%3Bdomain%3D.%27%20+%20location.host%3B%0A%20%20%20%20document.cookie%20%3D%20prefix%20+%20name%20+%20%27%3D%3Bmax-age%3D0%3Bpath%3D/%3Bexpires%3DThu%2C%2001%20Jan%201970%2000%3A00%3A01%20GMT%3B%27%3B%0A%7D%0A%0A%0Afunction%20array_move%28arr%2C%20old_index%2C%20new_index%29%20%7B%0A%20%20%20%20if%20%28new_index%20%3E%3D%20arr.length%29%20%7B%0A%20%20%20%20%20%20%20%20var%20k%20%3D%20new_index%20-%20arr.length%20+%201%3B%0A%20%20%20%20%20%20%20%20while%20%28k--%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20arr.push%28undefined%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20arr.splice%28new_index%2C%200%2C%20arr.splice%28old_index%2C%201%29%5B0%5D%29%3B%0A%20%20%20%20return%20arr%3B%20//%20for%20testing%0A%7D%3B%0A%0Afunction%20amILoggedIn%28%29%20%7B%0A%20%20%20%20if%20%28%24%28%22.user_profile_header%22%29.hasClass%28%22loggedIn%22%29%20%7C%7C%20sharedUserLoggedIn%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20return%20true%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20false%3B%0A%7D%0A%0Afunction%20logInUser%28userData%29%20%7B%0A%20%20%20%20%24%28%22.user_profile_header%22%29.addClass%28%22loggedIn%22%29%0A%20%20%20%20if%20%28readCookie%28%27sid%27%29%29%20%7B%0A%20%20%20%20%20%20%20%20%24%28%22%23subaccount_nav_dropdown_link%22%29.hide%28%29%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%24%28%22%23subaccount_nav_dropdown_link%22%29.show%28%29%0A%20%20%20%20%7D%0A%20%20%20%20let%20name%20%3D%20%27%27%3B%0A%20%20%20%20if%20%28%21empty%28readCookie%28%27sid%27%29%29%29%20%7B%0A%20%20%20%20%20%20%20%20name%20%3D%20extractDataFromArray%28userData%2C%20%5B%27sub_account_rec%27%2C%20%27name%27%5D%2C%20%27%27%29%3B%0A%20%20%20%20%20%20%20%20name%20%3D%20name.split%28%27%20%27%29%5B0%5D%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20name%20%3D%20userData%5B%27fname%27%5D%3B%0A%20%20%20%20%7D%0A%20%20%20%20%24%28%22.navbar_profile_pic%22%29.css%28%22background-image%22%2C%20%27url%28%27%20+%20userData%5B%27user_img%27%5D%20+%20%27%29%27%29%0A%20%20%20%20%24%28%22.dropdown-header%22%29.text%28name%29%0A%20%20%20%20%24%28%22%23nav_dashboard_link%22%29.removeClass%28%22d-none%22%29%0A%20%20%20%20if%20%28location.pathname%20%3D%3D%20%22/pricing%22%29%20%7B%0A%20%20%20%20%20%20%20%20Array.from%28%24%28%22.mypricing_content%22%29%29.forEach%28ele%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20button_text%20%3D%20%27CHOOSE%20PLAN%27%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%24%28ele%29.data%28%27plan%27%29%20%3D%3D%20extractDataFromArray%28user_info%2C%20%5B%27plan_info%27%2C%20%27plan%27%5D%2C%20%27FR%27%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20button_text%20%3D%20%27CURRENT%20PLAN%27%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28ele%29.find%28%27.mypricing_price_btn%20a%27%29.text%28button_text%29%0A%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%7D%0A%0A%20%20%20%20//%20%24%28%22%23headerSidebarCollapse%22%29.addClass%28%22d-none%22%29%0A%7D%0A%0Afunction%20logOutUser%28%29%20%7B%0A%20%20%20%20%24%28%22.user_profile_header%22%29.removeClass%28%22loggedIn%22%29%0A%20%20%20%20%24%28%22%23nav_dashboard_link%22%29.addClass%28%22d-none%22%29%0A%20%20%20%20%24%28%27%23sidebar%27%29.addClass%28%27active%27%29%3B%0A%20%20%20%20%24%28%27.fixnav%27%29.addClass%28%27left_nav_hide%27%29%3B%0A%7D%0A%0A%0Afunction%20showToast%28type%2C%20msg%29%20%7B%0A%20%20%20%20function%20showToastMsg%28type%2C%20msg%29%20%7B%0A%20%20%20%20%20%20%20%20var%20title%20%3D%20%27%27%3B%0A%20%20%20%20%20%20%20%20var%20icon%20%3D%20%27%27%3B%0A%20%20%20%20%20%20%20%20switch%20%28type%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20case%20%27E%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%20%3D%20%27Error%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20icon%20%3D%20%27icon-cross%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%0A%20%20%20%20%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%20%3D%20%27Success%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20icon%20%3D%20%27icon-checkmark%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%24%28%22.toast-container%22%29.append%28%27%3Cdiv%20class%3D%22toast%22%20role%3D%22alert%22%20aria-live%3D%22assertive%22%20aria-atomic%3D%22true%22%3E%5C%0A%09%09%09%09%09%09%09%09%09%09%3Cdiv%20class%3D%22toast-header%22%3E%5C%0A%09%09%09%09%09%09%09%09%09%09%09%3Ci%20class%3D%22rounded%20mr-2%20%27+%20icon%20+%20%27%22%20%3E%3C/i%3E%5C%0A%09%09%09%09%09%09%09%09%09%09%09%3Cstrong%20class%3D%22mr-auto%22%3E%27+%20title%20+%20%27%3C/strong%3E%5C%0A%09%09%09%09%09%09%09%09%09%09%09%3Cbutton%20type%3D%22button%22%20class%3D%22ml-2%20mb-1%20close%22%20data-dismiss%3D%22toast%22%20aria-label%3D%22Close%22%3E%5C%0A%09%09%09%09%09%09%09%09%09%09%09%09%3Cspan%20aria-hidden%3D%22true%22%3E%26times%3B%3C/span%3E%5C%0A%09%09%09%09%09%09%09%09%09%09%09%3C/button%3E%5C%0A%09%09%09%09%09%09%09%09%09%09%3C/div%3E%5C%0A%09%09%09%09%09%09%09%09%09%09%3Cdiv%20class%3D%22toast-body%22%3E%27+%20msg%20+%20%27%3C/div%3E%5C%0A%09%09%09%09%09%09%09%09%09%3C/div%3E%27%29%0A%20%20%20%20%7D%0A%20%20%20%20if%20%28%24%28%22.toast-container%22%29.length%20%3D%3D%200%29%20%7B%0A%20%20%20%20%20%20%20%20%24%28%22body%22%29.append%28%27%3Cdiv%20aria-live%3D%22polite%22%20aria-atomic%3D%22true%22%20style%3D%22position%3A%20relative%3B%20min-height%3A%20200px%3B%22%3E%5C%0A%09%09%09%09%09%09%09%09%3Cdiv%20class%3D%22toast-container%22%20style%3D%22position%3A%20absolute%3B%20top%3A%200%3B%20right%3A%200%3B%22%3E%3C/div%3E%5C%0A%09%09%09%09%09%09%09%3C/div%3E%27%29%0A%0A%20%20%20%20%7D%0A%20%20%20%20showToastMsg%28type%2C%20msg%29%0A%7D%0A%0Afunction%20getUrlVars%28%29%20%7B%0A%20%20%20%20var%20vars%20%3D%20%7B%7D%3B%0A%20%20%20%20var%20parts%20%3D%20window.location.href.replace%28/%5B%3F%26%5D+%28%5B%5E%3D%26%5D+%29%3D%28%5B%5E%26%5D*%29/gi%2C%20function%20%28m%2C%20key%2C%20value%29%20%7B%0A%20%20%20%20%20%20%20%20vars%5Bkey%5D%20%3D%20value%3B%0A%20%20%20%20%7D%29%3B%0A%20%20%20%20return%20vars%3B%0A%7D%0A%0Afunction%20getUrlParameterByName%28name%2C%20return_val%20%3D%20null%2C%20url%20%3D%20undefined%29%20%7B%0A%20%20%20%20if%20%28%21url%29%20url%20%3D%20window.location.href%3B%0A%20%20%20%20name%20%3D%20name.replace%28/%5B%5C%5B%5C%5D%5D/g%2C%20%22%5C%5C%24%26%22%29%3B%0A%20%20%20%20var%20regex%20%3D%20new%20RegExp%28%22%5B%3F%26%5D%22%20+%20name%20+%20%22%28%3D%28%5B%5E%26%23%5D*%29%7C%26%7C%23%7C%24%29%22%29%2C%0A%20%20%20%20%20%20%20%20results%20%3D%20regex.exec%28url%29%3B%0A%20%20%20%20if%20%28%21results%29%20return%20return_val%3B%0A%20%20%20%20if%20%28%21results%5B2%5D%29%20return%20return_val%3B%0A%20%20%20%20return%20decodeURIComponent%28results%5B2%5D.replace%28/%5C+/g%2C%20%22%20%22%29%29%3B%0A%7D%0Afunction%20removeUrlParameterByName%28name%29%20%7B%0A%20%20%20%20let%20url%20%3D%20window.location.search.substring%281%29%3B%0A%20%20%20%20let%20url_params%20%3D%20url.split%28%22%26%22%29%0A%20%20%20%20let%20new_url%20%3D%20%22%22%3B%0A%20%20%20%20let%20skip%20%3D%201%3B%0A%20%20%20%20url_params.forEach%28param%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20let%20param_name%20%3D%20param.split%28%22%3D%22%29%5B0%5D%0A%20%20%20%20%20%20%20%20if%20%28param_name%20%21%3D%20name%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20new_url%20+%3D%20%22%26%22%20+%20param%0A%20%20%20%20%20%20%20%20%7Delse%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20skip%20%3D%200%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%0A%0A%20%20%20%20if%28skip%29%7Breturn%7D%0A%0A%20%20%20%20try%20%7B%20window.history.replaceState%28null%2C%20null%2C%20window.location.origin%20+%20location.pathname%20+%20%28empty%28new_url%29%20%3F%20%27%27%20%3A%20%20%28new_url.length%20%3D%3D%200%3F%20%27%27%20%3A%20%22%3F%22%20+%20new_url.substring%281%29%29%29%29%3B%20%7D%0A%20%20%20%20catch%20%28e%29%20%7B%20console.log%28e%29%20%7D%0A%7D%0A%0Afunction%20appendReferrerToCookie%28%29%20%7B%0A%20%20%20%20if%20%28%21empty%28document.referrer%29%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28document.referrer.search%28location.origin%29%20%21%3D%200%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20urls%20%3D%20decodeURIComponent%28readCookie%28%22broswer_ref%22%29%29.split%28%22%2C%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28urls%5Burls.length%20-%201%5D%20%21%3D%20document.referrer%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20urls.push%28document.referrer%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20set_cookie%28%22qr-broswer_ref%22%2C%20urls.join%28%22%2C%22%29%2C%20%28new%20Date%28%29%29.getFullYear%28%29%20+%2020%2C%201%2C%201%2C%20%27/%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0AappendReferrerToCookie%28%29%0Avar%20PageHeader%20%3D%20%7B%0A%20%20%20%20startDate%3A%20null%2C%0A%20%20%20%20endDate%3A%20null%2C%0A%20%20%20%20onDateRageChange%3A%20null%2C%20//callback%20function%20set%20by%20the%20page%0A%20%20%20%20productList%3A%20%7B%7D%2C//storing%20here%20so%20once%20fetched%20it%20can%20be%20used%20inside%20pages%20if%20needed%0A%20%20%20%20productListLoaded%3A%20false%2C%0A%20%20%20%20init%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20PageHeader.setupDatePicker%28%29%3B%0A%20%20%20%20%20%20%20%20PageHeader.setupProductPicker%28%29%3B%0A%20%20%20%20%20%20%20%20//%20PageHeader.setupBatchPicker%28%29%3B%0A%20%20%20%20%20%20%20%20PageHeader.setSwalDefaults%28%29%3B%0A%20%20%20%20%20%20%20%20PageHeader.setjQueryValidatorDefaults%28%29%3B%0A%20%20%20%20%20%20%20%20DateFilter.init%28%29%3B%0A%0A%20%20%20%20%20%20%20%20%24%28%22%23userList%20option%3Alast%22%29.attr%28%22selected%22%2C%20%22selected%22%29%3B%0A%20%20%20%20%20%20%20%20%24%28%27.select-search%27%29.select2%28%29%3B%0A%20%20%20%20%7D%2C%0A%20%20%20%20setupDatePicker%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20var%20clientSpecificTime%20%3D%20_getTimezoneSpecificTimeObj%28%29%3B%0A%20%20%20%20%20%20%20%20if%20%28%24%28%27.daterange-ranges%27%29.length%20%3D%3D%200%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%24%28%27.daterange-ranges%27%29.daterangepicker%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//startDate%3A%20moment%28%29.subtract%2829%2C%20%27days%27%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20endDate%3A%20clientSpecificTime%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20maxDate%3A%20clientSpecificTime%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ranges%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%27Today%27%3A%20%5BclientSpecificTime%2C%20clientSpecificTime%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%27Yesterday%27%3A%20%5BclientSpecificTime.subtract%281%2C%20%27days%27%29%2C%20clientSpecificTime.subtract%281%2C%20%27days%27%29%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%27Last%207%20Days%27%3A%20%5BclientSpecificTime.subtract%286%2C%20%27days%27%29%2C%20clientSpecificTime%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%27Last%2030%20Days%27%3A%20%5BclientSpecificTime.subtract%2829%2C%20%27days%27%29%2C%20clientSpecificTime%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%27Last%2090%20Days%27%3A%20%5BclientSpecificTime.subtract%2889%2C%20%27days%27%29%2C%20clientSpecificTime%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%27This%20Month%27%3A%20%5BclientSpecificTime.startOf%28%27month%27%29%2C%20clientSpecificTime%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%27Last%20Month%27%3A%20%5BclientSpecificTime.subtract%281%2C%20%27month%27%29.startOf%28%27month%27%29%2C%20clientSpecificTime.subtract%281%2C%20%27month%27%29.endOf%28%27month%27%29%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20opens%3A%20%27left%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20applyClass%3A%20%27btn-small%20bg-slate-600%20btn-block%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20cancelClass%3A%20%27btn-small%20btn-default%20btn-block%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20%27DD/MM/YYYY%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20function%20%28start%2C%20end%2C%20label%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.daterange-ranges%20span%27%29.html%28start.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20end.format%28%27MMMM%20D%27%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20start.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20end.format%28%27YYYY-MM-DD%27%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//added%20by%20aasim%20storing%20user%20search%20preference%20in%20local%20storage%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20strSearchDate%20%3D%20PageHeader.startDate%20+%20%27%7C%27%20+%20PageHeader.endDate%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20createCookie%28%27searchDate%27%2C%20strSearchDate%2C%20365%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20createCookie%28%27searchDateLabel%27%2C%20label%2C%20365%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28PageHeader.onDateRageChange%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.onDateRageChange%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%29%3B%0A%20%20%20%20%20%20%20%20var%20arrDate%20%3D%20getDateFromCookie%28%29%3B%0A%20%20%20%20%20%20%20%20if%20%28%21empty%28arrDate%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20moment%28arrDate%5B0%5D%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20moment%28arrDate%5B1%5D%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20clientSpecificTime.subtract%2829%2C%20%27days%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20clientSpecificTime.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%20%20%20%20setupProductPicker%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28%24%28%27%23productList%27%29.length%20%3D%3D%200%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20PageHeader.getProductList%28%29%3B%0A%20%20%20%20%7D%2C%0A%0A%20%20%20%20getDisplayTitle%3A%20function%20%28title%2C%20length%2C%20wrapLength%29%20%7B%0A%20%20%20%20%20%20%20%20var%20l%20%3D%20title.length%3B%0A%20%20%20%20%20%20%20%20length%20%3D%20length%20%3F%20length%20%3A%2030%3B%0A%20%20%20%20%20%20%20%20wrapLength%20%3D%20wrapLength%20%3F%20wrapLength%20%3A%2045%3B%0A%20%20%20%20%20%20%20%20if%20%28l%20%3E%20wrapLength%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%20%3D%20title.substring%280%2C%20length%29%20+%20%27...%27%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20return%20title%3B%0A%20%20%20%20%7D%2C%0A%0A%20%20%20%20getProductList%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20showLoaderOnBlock%28%22.content-wrapper%22%29%3B%0A%20%20%20%20%20%20%20%20%24.get%28%22//%22%20+%20__api_domain%20+%20%27/user/services/api%3Fcmd%3DgetProductList%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20function%20%28response%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22.content-wrapper%22%29.unblock%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20json%20%3D%20parseResponse%28response%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28json%29%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20%24productList%20%3D%20%24%28%27%23productList%2C%20.productList%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24productList.empty%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.productList%20%3D%20%7B%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24productList.append%28%27%3Coption%20value%3D%22All%22%3EAll%20Products%3C/option%3E%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20for%20%28var%20counter%20%3D%200%3B%20counter%20%3C%20json.data.length%3B%20++counter%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20element%20%3D%20json.data%5Bcounter%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24productList.append%28%27%3Coption%20value%3D%22%27%20+%20element._id%20+%20%27%22%20title%3D%22%27%20+%20element.pr_description.value.pr_title%20+%20%27%22%3E%27%20+%20PageHeader.getDisplayTitle%28element.pr_description.value.pr_title%29%20+%20%27%20%20%28%27%20+%20element.sku_id%20+%20%27%29%20%3C/option%3E%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.productList%5Belement._id%5D%20%3D%20element%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24productList.select2%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.productListLoaded%20%3D%20true%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%2C%0A%0A%20%20%20%20//%20setupBatchPicker%3A%20function%28%29%20%7B%0A%20%20%20%20//%20%20%20%20%20if%28%24%28%27%23batchList%27%29.length%20%3D%3D%200%29%7B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20//%20%20%20%20%20%7D%0A%20%20%20%20//%20%20%20%20%20PageHeader.getBatchList%28%29%3B%0A%20%20%20%20//%20%7D%2C%0A%0A%20%20%20%20//%20getBatchList%3A%20function%28%29%0A%20%20%20%20//%20%7B%0A%20%20%20%20//%20%20%20%20%20showLoaderOnBlock%28%22.content-wrapper%22%29%3B%0A%20%20%20%20//%20%20%20%20%20%24.ajax%28%7B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20data%3A%20%7B%27cmd%27%20%3A%20%27getBatchList%27%7D%2C%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20type%3A%20%22POST%22%2C%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20url%3A%20%22//%22+__api_domain+%22/user/services/api%22%2C%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20success%3A%20function%28response%29%20%7B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22.content-wrapper%22%29.unblock%28%29%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20var%20json%20%3D%20parseResponse%28response%29%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20if%28%21json%29%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20%20%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20var%20%24batchList%20%3D%20%24%28%27%23batchList%27%29%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%24batchList.empty%28%29%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20//%20PageHeader.batchList%20%3D%20%7B%7D%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%24batchList.append%28%27%3Coption%20value%3D%22All%22%3EAll%20Batch%3C/option%3E%27%29%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20for%28var%20counter%3D0%3B%20counter%3Cjson.data.length%3B%20++counter%29%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20element%20%3D%20json.data%5Bcounter%5D%3B%20%20%20%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24batchList.append%28%60%3Coption%20value%3D%22%24%7Belement._id%7D%22%20%3E%24%7Belement.client_batch_id%7D%3C/option%3E%60%29%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20PageHeader.productList%5Belement._id%5D%20%3D%20element%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%24batchList.select2%28%29%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20//%20PageHeader.productListLoaded%20%3D%20true%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20error%3A%20function%28XMLHttpRequest%2C%20textStatus%2C%20errorThrown%29%20%7B%20%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22.content-wrapper%22%29.unblock%28%29%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%20%20%20%20showAlertMessage%28%27E%27%2CerrorThrown%29%3B%0A%20%20%20%20//%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20//%20%20%20%20%20%7D%29%0A%20%20%20%20//%20%7D%2C%0A%0A%20%20%20%20setSwalDefaults%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20swal.setDefaults%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20buttonsStyling%3A%20false%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20confirmButtonClass%3A%20%27btn%20btn-primary%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20cancelButtonClass%3A%20%27btn%20btn-light%27%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%2C%0A%20%20%20%20setjQueryValidatorDefaults%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20jQuery.validator.setDefaults%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20ignore%3A%20%27input%5Btype%3Dhidden%5D%2C%20.select2-search__field%27%2C%20//%20ignore%20hidden%20fields%0A%20%20%20%20%20%20%20%20%20%20%20%20errorClass%3A%20%27validation-invalid-label%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20successClass%3A%20%27validation-valid-label%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20validClass%3A%20%27validation-valid-label%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20highlight%3A%20function%20%28element%2C%20errorClass%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28element%29.removeClass%28errorClass%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20unhighlight%3A%20function%20%28element%2C%20errorClass%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28element%29.removeClass%28errorClass%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20success%3A%20function%20%28label%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//label.removeClass%28%27validation-invalid-label%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label.remove%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//label.addClass%28%27validation-valid-label%27%29.text%28%27Success.%27%29%3B%20//%20remove%20to%20hide%20Success%20message%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20//%20Different%20components%20require%20proper%20error%20label%20placement%0A%20%20%20%20%20%20%20%20%20%20%20%20errorPlacement%3A%20function%20%28error%2C%20element%29%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20Unstyled%20checkboxes%2C%20radios%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28element.parents%28%29.hasClass%28%27form-check%27%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20error.appendTo%28element.parents%28%27.form-check%27%29.parent%28%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20Input%20with%20icons%20and%20Select2%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20else%20if%20%28element.parents%28%29.hasClass%28%27form-group-feedback%27%29%20%7C%7C%20element.hasClass%28%27select2-hidden-accessible%27%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20error.appendTo%28element.parent%28%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20Input%20group%2C%20styled%20file%20input%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20else%20if%20%28element.parent%28%29.is%28%27.uniform-uploader%2C%20.uniform-select%27%29%20%7C%7C%20element.parents%28%29.hasClass%28%27input-group%27%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20error.appendTo%28element.parent%28%29.parent%28%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20else%20if%20%28element.hasClass%28%27select2%27%29%20%26%26%20element.next%28%27.select2-container%27%29.length%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20error.insertAfter%28element.next%28%27.select2-container%27%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20Other%20elements%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20error.insertAfter%28element%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20rules%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20password%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%205%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20repeat_password%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20equalTo%3A%20%27%23password%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20repeat_email%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20equalTo%3A%20%27%23email%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minimum_characters%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%2010%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20maximum_characters%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20maxlength%3A%2010%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minimum_number%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min%3A%2010%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20maximum_number%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20max%3A%2010%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20number_range%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20range%3A%20%5B10%2C%2020%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20url%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20url%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20date%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20date%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20date_iso%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateISO%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20numbers%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20number%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20digits%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20digits%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20creditcard%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20creditcard%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20basic_checkbox%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%202%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20styled_checkbox%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%202%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20switchery_group%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%202%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20switch_group%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%202%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20messages%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20custom%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20required%3A%20%27This%20is%20a%20custom%20error%20message%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20basic_checkbox%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%20%27Please%20select%20at%20least%20%7B0%7D%20checkboxes%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20styled_checkbox%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%20%27Please%20select%20at%20least%20%7B0%7D%20checkboxes%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20switchery_group%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%20%27Please%20select%20at%20least%20%7B0%7D%20switches%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20switch_group%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20minlength%3A%20%27Please%20select%20at%20least%20%7B0%7D%20switches%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20agree%3A%20%27Please%20accept%20our%20policy%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%2C%0A%20%20%20%20addButtonToDataTableDiv%3A%20function%20%28filterCategory%29%20%7B%0A%20%20%20%20%20%20%20%20//%20%24%28%27.filterDiv%27%29.html%28%60%3Ch3%20class%3D%22heading-btn%20m-2%22%3E%3Cspan%20class%3D%22badge%20badge-pill%20badge-light%22%20%3E%3Ci%20class%3D%22icon-cancel-circle2%20text-muted%20font20%20%60+filterCategory+%60-close%22%20style%3D%22cursor%3Apointer%3B%22%20onclick%3D%22DateFilter.removeFilter%28%29%3B%22%3E%3C/i%3E%26nbsp%3B%26nbsp%3B%3Cspan%20id%3D%22dateText%22%20style%3D%22cursor%3Apointer%3B%22%20data-toggle%3D%22modal%22%20data-target%3D%22%23dateFilterModal%22%20onclick%3D%22PageHeader.showDateFilter%28%29%3B%22%3E%3C/span%3E%3C/span%3E%3C/h3%3E%60%29%3B%20%20%20%20%20%20%20%20%0A%0A%20%20%20%20%20%20%20%20DateFilter.init%28%27dataTable%27%29%3B%0A%20%20%20%20%20%20%20%20//%20%20%20DateFilter.removeFilter%28%29%3B%0A%20%20%20%20%20%20%20%20PageHeader.showDateFilter%28%29%3B%0A%20%20%20%20%7D%2C%0A%20%20%20%20showDateFilter%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20//%20%24%28%27.dateRangeRadio%27%29.uniform%28%7B%0A%20%20%20%20%20%20%20%20//%20%20%20%20%20wrapperClass%3A%20%27border-primary-600%20text-primary-800%27%0A%20%20%20%20%20%20%20%20//%20%7D%29%3B%0A%0A%20%20%20%20%20%20%20%20%24%28%27%23dateFilterModal%27%29.modal%28%22show%22%29%3B%0A%20%20%20%20%7D%0A%7D%0A%0Avar%20DateFilter%20%3D%20%7B%0A%0A%20%20%20%20calendar_startDate%3A%20null%2C%0A%20%20%20%20calendar_endDate%3A%20null%2C%0A%20%20%20%20minDate%3A%20-999%2C%0A%20%20%20%20init%3A%20function%20%28filterCategory%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28%24%28%27%23daterange_start_date%2C%20%23daterange_end_date%2C%20%23daterange_start_date_startToToday%27%29.length%20%3D%3D%200%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20this.calendar_startDate%20%3D%20%24%28%27%23daterange_start_date%27%29.pickadate%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20min%3A%20DateFilter.minDate%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20max%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20formatSubmit%3A%20%27yyyy-mm-dd%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20selectYears%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20selectMonths%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20today%3A%20false%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20clear%3A%20false%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20close%3A%20false%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20%20%20this.calendar_endDate%20%3D%20%24%28%27%23daterange_end_date%27%29.pickadate%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20min%3A%20DateFilter.minDate%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20max%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20formatSubmit%3A%20%27yyyy-mm-dd%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20selectYears%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20selectMonths%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20today%3A%20false%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20clear%3A%20false%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20close%3A%20false%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20%20%20this.calendar_startToToday%20%3D%20%24%28%27%23daterange_start_date_startToToday%27%29.pickadate%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20min%3A%20DateFilter.minDate%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20max%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20formatSubmit%3A%20%27yyyy-mm-dd%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20selectYears%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20selectMonths%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20today%3A%20false%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20clear%3A%20false%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20close%3A%20false%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%20%20if%20%28filterCategory%20%3D%3D%20%22dataTable%22%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21PageHeader.startDate%20%26%26%20%21PageHeader.endDate%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.dateRangeRadio%5Bvalue%20%3D%2030d%5D%27%29.prop%28%27checked%27%2C%20false%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.heading-btn%20span%5Bid%3D%22dateText%22%5D%27%29.html%28%27%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20%24%28%27.heading-btn%27%29.addClass%28%22d-none%22%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.filterDiv%27%29.html%28%60%3Ch3%20class%3D%22heading-btn%20m-2%22%3E%3Cspan%20class%3D%22badge%20badge-pill%20badge-light%22%20%3E%3Ci%20class%3D%22icon-cancel-circle2%20text-muted%20font20%20dateRangeFilter-close%22%20style%3D%22cursor%3Apointer%3B%22%20onclick%3D%22DateFilter.removeFilter%28%29%3B%22%3E%3C/i%3E%26nbsp%3B%26nbsp%3B%3Cspan%20id%3D%22dateText%22%20style%3D%22cursor%3Apointer%3B%22%20data-toggle%3D%22modal%22%20data-target%3D%22%23dateFilterModal%22%20onclick%3D%22PageHeader.showDateFilter%28%29%3B%22%3E%3C/span%3E%3C/span%3E%3C/h3%3E%60%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.heading-btn%20span%5Bid%3D%22dateText%22%5D%27%29.html%28moment%28PageHeader.startDate%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20moment%28PageHeader.endDate%29.format%28%27MMMM%20D%27%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20start%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%2829%2C%20%27days%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20end%20%3D%20_getTimezoneSpecificTimeObj%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20start.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20end.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.heading-btn%20span%5Bid%3D%22dateText%22%5D%27%29.html%28start.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20end.format%28%27MMMM%20D%27%29%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20//%20%24%28%27%23customDateDiv%27%29.hide%28%29%3B%0A%20%20%20%20%20%20%20%20%24%28%27%23daterange_startToToday_div%27%29.hide%28%29%3B%0A%20%20%20%20%20%20%20%20%24%28%27%23daterange_end_date_div%27%29.hide%28%29%3B%0A%20%20%20%20%20%20%20%20%24%28%27%23daterange_start_date_div%27%29.hide%28%29%3B%0A%0A%20%20%20%20%20%20%20%20%24%28%27input%5Bname%3D%22dateRangeOption%22%5D%27%29.on%28%27click%27%2C%20function%20%28e%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20DateFilter.hideShowCustomDate%28e%29%3B%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20%20%20var%20moduleName%20%3D%20window.location.pathname.split%28%22/%22%29%5B1%5D%3B%0A%20%20%20%20%20%20%20%20var%20allowedModules%20%3D%20%5B%27dashboard%27%2C%20%27im%27%2C%20%27tt%27%2C%20%27counterfeit%27%5D%3B%0A%20%20%20%20%20%20%20%20/**%0A%20%20%20%20%20%20%20%20%20*%20Commenting%20this%20if%20condition%0A%20%20%20%20%20%20%20%20%20*%20Jira%20-%201822%20%3A%20Client%20%3D%3D%3E%20Applied%20Date%20should%20be%20saved%20for%20all%20pages%20where%20calender%20is%20on%20top%20instead%20of%20filter%20%28above%20table.%29%0A%20%20%20%20%20%20%20%20%20*/%0A%0A%20%20%20%20%20%20%20%20/**%0A%20%20%20%20%20%20%20%20%20*%20Adding%20true%20in%20or%20condition%20as%20this%20may%20change%20in%20future%0A%20%20%20%20%20%20%20%20%20*/%0A%20%20%20%20%20%20%20%20if%20%28allowedModules.includes%28moduleName%29%20%7C%7C%20true%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20arrDate%20%3D%20getDateFromCookie%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21empty%28arrDate%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20moment%28arrDate%5B0%5D%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20moment%28arrDate%5B1%5D%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21empty%28arrDate%5B2%5D%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.dateRangeRadio%5Bvalue%3D%22%27%20+%20arrDate%5B2%5D%20+%20%27%22%5D%27%29.prop%28%27checked%27%2C%20true%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28arrDate%5B2%5D%20%3D%3D%20%27c%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20pickerStartDate%20%3D%20this.calendar_startDate.pickadate%28%27picker%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20pickerEndDate%20%3D%20this.calendar_endDate.pickadate%28%27picker%27%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20pickerStartDate.set%28%27select%27%2C%20new%20Date%28arrDate%5B0%5D%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20pickerEndDate.set%28%27select%27%2C%20new%20Date%28arrDate%5B1%5D%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_start_date_div%27%29.show%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_end_date_div%27%29.show%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20else%20if%20%28arrDate%5B2%5D%20%3D%3D%20%27startToToday%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20pickerStartToToday%20%3D%20this.calendar_startToToday.pickadate%28%27picker%27%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20pickerStartToToday.set%28%27select%27%2C%20new%20Date%28arrDate%5B0%5D%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_startToToday_div%27%29.show%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%0A%20%20%20%20setDateRange%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20var%20formObject%20%3D%20%24%28%27%23dateRangeForm%27%29%3B%0A%20%20%20%20%20%20%20%20var%20formData%20%3D%20serializeFormObject%28formObject%29%3B%0A%20%20%20%20%20%20%20%20var%20dateRangeOption%20%3D%20formData.dateRangeOption%3B%0A%20%20%20%20%20%20%20%20var%20dateToDisplay%20%3D%20%27%27%3B%0A%20%20%20%20%20%20%20%20var%20start%2C%20end%3B%0A%20%20%20%20%20%20%20%20if%20%28%21empty%28dateRangeOption%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20switch%20%28dateRangeOption%29%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%27today%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateToDisplay%20%3D%20_getTimezoneSpecificTimeObj%28%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20_getTimezoneSpecificTimeObj%28%29.format%28%27MMMM%20D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.format%28%27YYYY-MM-DD%27%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%27yesterday%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateToDisplay%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%281%2C%20%27days%27%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20_getTimezoneSpecificTimeObj%28%29.subtract%281%2C%20%27days%27%29.format%28%27MMMM%20D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%281%2C%20%27days%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%281%2C%20%27days%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%277d%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateToDisplay%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%286%2C%20%27days%27%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20_getTimezoneSpecificTimeObj%28%29.format%28%27MMMM%20D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%286%2C%20%27days%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%2730d%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateToDisplay%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%2829%2C%20%27days%27%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20_getTimezoneSpecificTimeObj%28%29.format%28%27MMMM%20D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%2829%2C%20%27days%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%2790d%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateToDisplay%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%2889%2C%20%27days%27%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20_getTimezoneSpecificTimeObj%28%29.format%28%27MMMM%20D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%2889%2C%20%27days%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%27currentMonth%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateToDisplay%20%3D%20_getTimezoneSpecificTimeObj%28%29.startOf%28%27month%27%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20_getTimezoneSpecificTimeObj%28%29.format%28%27MMMM%20D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.startOf%28%27month%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%27lastMonth%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateToDisplay%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%281%2C%20%27month%27%29.startOf%28%27month%27%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20_getTimezoneSpecificTimeObj%28%29.subtract%281%2C%20%27month%27%29.endOf%28%27month%27%29.format%28%27MMMM%20D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%281%2C%20%27month%27%29.startOf%28%27month%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.subtract%281%2C%20%27month%27%29.endOf%28%27month%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%27c%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28empty%28formData.start_date_submit%29%20%7C%7C%20empty%28formData.end_date_submit%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20showAlertMessage%28%27E%27%2C%20%27Please%20select%20start%20and%20end%20date.%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28moment%28formData.end_date_submit%29.diff%28moment%28formData.start_date_submit%29%2C%20%27days%27%29%20%3C%200%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20showAlertMessage%28%27E%27%2C%20%27Start%20date%20should%20be%20less%20than%20or%20equal%20to%20the%20end%20date.%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateToDisplay%20%3D%20moment%28formData.start_date_submit%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20moment%28formData.end_date_submit%29.format%28%27MMMM%20D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20formData.start_date_submit%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20formData.end_date_submit%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%27startToToday%27%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28empty%28formData.startToToday_date_submit%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20showAlertMessage%28%27E%27%2C%20%27Please%20select%20start%20date.%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dateToDisplay%20%3D%20moment%28formData.startToToday_date_submit%29.format%28%27MMMM%20D%27%29%20+%20%27%20-%20%27%20+%20_getTimezoneSpecificTimeObj%28%29.format%28%27MMMM%20D%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20formData.startToToday_date_submit%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20_getTimezoneSpecificTimeObj%28%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.filterDiv%27%29.html%28%60%3Ch3%20class%3D%22heading-btn%20m-2%22%3E%3Cspan%20class%3D%22badge%20badge-pill%20badge-light%22%20%3E%3Ci%20class%3D%22icon-cancel-circle2%20text-muted%20font20%20dateRangeFilter-close%22%20style%3D%22cursor%3Apointer%3B%22%20onclick%3D%22DateFilter.removeFilter%28%29%3B%22%3E%3C/i%3E%26nbsp%3B%26nbsp%3B%3Cspan%20id%3D%22dateText%22%20style%3D%22cursor%3Apointer%3B%22%20data-toggle%3D%22modal%22%20data-target%3D%22%23dateFilterModal%22%20onclick%3D%22PageHeader.showDateFilter%28%29%3B%22%3E%3C/span%3E%3C/span%3E%3C/h3%3E%60%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.heading-btn%27%29.removeClass%28%22d-none%22%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27.heading-btn%20span%5Bid%3D%22dateText%22%5D%27%29.html%28dateToDisplay%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20moduleName%20%3D%20window.location.pathname.split%28%22/%22%29%5B1%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20/**%0A%20%20%20%20%20%20%20%20%20%20%20%20%20*%20Jira%20-%201822%20%3A%20Applied%20Date%20should%20be%20saved%20for%20all%20pages%20where%20calender%20is%20on%20top%20instead%20of%20filter%20%28above%20table.%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20*/%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20allowedModules%20%3D%20%5B%27dashboard%27%2C%20%27im%27%2C%20%27tt%27%2C%20%27counterfeit%27%5D%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20/**%0A%20%20%20%20%20%20%20%20%20%20%20%20%20*%20Adding%20true%20in%20or%20condition%20as%20this%20may%20change%20in%20future%0A%20%20%20%20%20%20%20%20%20%20%20%20%20*/%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28allowedModules.includes%28moduleName%29%20%7C%7C%20true%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20strSearchDate%20%3D%20PageHeader.startDate%20+%20%27%7C%27%20+%20PageHeader.endDate%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20createCookie%28%27searchDate%27%2C%20strSearchDate%2C%20365%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20createCookie%28%27searchDateLabel%27%2C%20dateRangeOption%2C%20365%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28PageHeader.onDateRageChange%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.onDateRageChange%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23dateFilterModal%27%29.modal%28%22hide%22%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%20%20%20%20hideShowCustomDate%3A%20function%20%28e%29%20%7B%0A%20%20%20%20%20%20%20%20var%20value%20%3D%20e.target.value%3B%0A%20%20%20%20%20%20%20%20if%20%28value%20%3D%3D%20%27c%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_startToToday_div%27%29.hide%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_end_date_div%27%29.show%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_start_date_div%27%29.show%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20//%20%24%28%27%23customDateDiv%27%29.show%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_end_date%27%29.val%28%27%27%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20else%20if%20%28value%20%3D%3D%20%22startToToday%22%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20//%20%24%28%27%23customDateDiv%27%29.show%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_startToToday_div%27%29.show%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_start_date_div%27%29.hide%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20pickerEndDate%20%3D%20DateFilter.calendar_endDate.pickadate%28%27picker%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20pickerEndDate.set%28%27select%27%2C%20new%20Date%28%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_end_date_div%27%29.hide%28%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_startToToday_div%27%29.hide%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_end_date_div%27%29.hide%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%27%23daterange_start_date_div%27%29.hide%28%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%0A%20%20%20%20removeFilter%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20%24%28event.target%29.parent%28%29.remove%28%29%3B%0A%20%20%20%20%20%20%20%20%24%28%27.filterDiv%27%29.empty%28%29%3B%0A%0A%20%20%20%20%20%20%20%20/**%0A%20%20%20%20%20%20%20%20%20*%20Commenting%20below%20code%0A%20%20%20%20%20%20%20%20%20*%20%20Jira%20-%201822%20%3A%20defult%2030%20days%20filter%20should%20not%20be%20shown%20in%20datatable%0A%20%20%20%20%20%20%20%20%20*/%0A%20%20%20%20%20%20%20%20//%20%24%28%27.dateRangeRadio%5Bvalue%20%3D%2030d%5D%27%29.prop%28%27checked%27%2C%20true%29%3B%0A%20%20%20%20%20%20%20%20//%20PageHeader.startDate%20%3D%20moment%28%29.subtract%2829%2C%20%27days%27%29.format%28%27YYYY-MM-DD%27%29%3B%0A%20%20%20%20%20%20%20%20//%20PageHeader.endDate%20%3D%20moment%28%29.format%28%27YYYY-MM-DD%27%29%3B%0A%0A%20%20%20%20%20%20%20%20%24%28%27.dateRangeRadio%27%29.prop%28%27checked%27%2C%20false%29%3B%0A%20%20%20%20%20%20%20%20PageHeader.startDate%20%3D%20null%3B%0A%20%20%20%20%20%20%20%20PageHeader.endDate%20%3D%20null%3B%0A%0A%20%20%20%20%20%20%20%20if%20%28PageHeader.onDateRageChange%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20PageHeader.onDateRageChange%28%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%7D%0A%0Afunction%20initInvoicePopups%28%29%20%7B%0A%20%20%20%20let%20__download_invoice_call%20%3D%20false%3B%0A%20%20%20%20let%20current_user%20%3D%20user_info%3B%0A%20%20%20%20if%20%28page%20%3D%3D%20%27users%27%29%20%7B%0A%20%20%20%20%20%20%20%20current_user%20%3D%20__current_user_info%3B%0A%20%20%20%20%7D%0A%20%20%20%20function%20showEditBillingInfoPopup%28%29%20%7B%0A%20%20%20%20%20%20%20%20let%20country_dropdown_html%20%3D%20%27%27%3B%0A%20%20%20%20%20%20%20%20const%20user_country%20%3D%20extractDataFromArray%28current_user%2C%20%5B%27billing_info%27%2C%20%27country%27%5D%2C%20extractDataFromArray%28current_user%2C%20%5B%27ip%27%2C%20%27country%27%5D%29%29%0A%20%20%20%20%20%20%20%20const%20user_state%20%3D%20extractDataFromArray%28current_user%2C%20%5B%27billing_info%27%2C%20%27state%27%5D%2C%20extractDataFromArray%28current_user%2C%20%5B%27ip%27%2C%20%27state%27%5D%29%29%0A%20%20%20%20%20%20%20%20Object.keys%28countryCodeToName%29.forEach%28code%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20country_dropdown_html%20+%3D%20%27%3Coption%20value%3D%22%27%20+%20code%20+%20%27%22%20%27%20+%20%28user_country%20%3D%3D%20code%20%3F%20%27selected%27%20%3A%20%27%27%29%20+%20%27%3E%27%20+%20countryCodeToName%5Bcode%5D%20+%20%27%3C/option%3E%27%0A%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20let%20state_dropdown_html%20%3D%20%27%27%3B%0A%20%20%20%20%20%20%20%20IndianStateNames.forEach%28state%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20state_dropdown_html%20+%3D%20%27%3Coption%20value%3D%22%27%20+%20state%20+%20%27%22%20%27%20+%20%28user_state%20%3D%3D%20state%20%3F%20%27selected%27%20%3A%20%27%27%29%20+%20%27%3E%27%20+%20state%20+%20%27%3C/option%3E%27%0A%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%24%28%22.stripe_billing_address%22%29.html%28%29%0A%20%20%20%20%20%20%20%20BillingInfo.listeners%28%29%0A%20%20%20%20%20%20%20%20Swal.fire%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20width%3A%20600%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20%27Billing%20Details%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20html%3A%20%60%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22text-left%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22font-16%20font-weight-semibold%20mb-2%22%3EBusiness%20Name%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22font-14%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cinput%20type%3D%22text%22%20class%3D%22form-control%22%20name%3D%22name%22%20value%3D%22%60+%20extractDataFromArray%28current_user%2C%20%5B%27billing_info%27%2C%20%27name%27%5D%2C%20current_user%5B%27fname%27%5D%20+%20%28empty%28current_user%5B%27lname%27%5D%29%20%3F%20%27%27%20%3A%20%27%20%27%20+%20current_user%5B%27lname%27%5D%29%29%20+%20%60%22%20errormsg%3D%22Name%20is%20incomplete.%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%60+%20BillingInfo.getBillingInfosForm%28%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20showCancelButton%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20reverseButtons%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20confirmButtonText%3A%20%27Save%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20willOpen%3A%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20BillingInfo.listeners%28%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20BillingInfo.inputValidations%28%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23swal2-content%20input%5Bname%3Dname%5D%22%29.on%28%22input%22%2C%20function%20%28e%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28e.target.value%20%3D%3D%20%27%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20showInputInvalid%28%22%23swal2-content%20input%5Bname%3Dname%5D%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20hideInputInvalid%28%22%23swal2-content%20input%5Bname%3Dname%5D%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20preConfirm%3A%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20billing_info%20%3D%20BillingInfo.getFormData%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21billing_info%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20false%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20billing_info.name%20%3D%20%24%28%22%23swal2-content%20input%5Bname%3Dname%5D%22%29.val%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28empty%28billing_info.name%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20showInputInvalid%28%22%23swal2-content%20input%5Bname%3Dname%5D%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20false%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20billing_info%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29.then%28result%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28result.isConfirmed%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24.post%28%22//%22%20+%20__api_domain%20+%20%22/user/services/api%22%2C%20%7B%20cmd%3A%20%27updateProfile%27%2C%20formData%3A%20JSON.stringify%28%7B%20billing_info%3A%20result.value%20%7D%29%2C%20user_id%3A%20getUrlParameterByName%28%27user_id%27%29%20%7D%2C%20function%20%28response%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21empty%28response.data%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28page%20%3D%3D%20%27users%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20__current_user_info%5B%27billing_info%27%5D%20%3D%20result.value%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20user_info%5B%27billing_info%27%5D%20%3D%20result.value%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23billing_info_name%22%29.text%28result.value.name%29%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20address%20%3D%20result.value.line1%20+%20%27%3Cbr%3E%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21empty%28result.value.city%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20address%20+%3D%20result.value.city%20+%20%27%3Cbr%3E%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21empty%28result.value.state%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20address%20+%3D%20result.value.state%20+%20%27%3Cbr%3E%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20address%20+%3D%20%27Zip%20-%20%27%20+%20result.value.postal_code%20+%20%27%3Cbr%3E%27%20+%20countryCodeToName%5Bresult.value.country%5D%20+%20%27%3Cbr%3E%27%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23billing_info_address%22%29.html%28address%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28result.value.country%20%3D%3D%20%27IN%27%20%26%26%20%21empty%28result.value.gstpin%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23billing_info_gstpin%22%29.html%28%22%3Cstrong%3EGST%20PIN%3A%20%3C/strong%3E%22%20+%20result.value.gstpin%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23billing_info_gstpin%22%29.show%28%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23billing_info_gstpin%22%29.hide%28%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20SwalPopup.showSingleButtonPopup%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20%27%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20icon%3A%20%27success%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20text%3A%20%22Saved%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20confirmButtonText%3A%20%27Ok%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21empty%28__download_invoice_call%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20inv_id%20%3D%20__download_invoice_call%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20__download_invoice_call%20%3D%20false%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20location.href%20%3D%20%22//%22%20+%20__api_domain%20+%20%22/user/services/api%3Fcmd%3DgetInvoicePdf%26inv_id%3D%22%20+%20inv_id%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%0A%0A%20%20%20%20%20%20%20%20%24%28%22select%5Bname%3Dcountry%5D%22%29.select2%28%29%0A%20%20%20%20%20%20%20%20%24%28%22select%5Bname%3Dstate%5D%22%29.select2%28%29%0A%20%20%20%20%7D%0A%0A%20%20%20%20%24%28%22%23btn_edit_biller_info%22%29.on%28%22click%22%2C%20function%20%28e%29%20%7B%0A%20%20%20%20%20%20%20%20showEditBillingInfoPopup%28%29%0A%20%20%20%20%7D%29%0A%20%20%20%20%24%28document%29.on%28%22click%22%2C%20%27.btn_download_invoice%27%2C%20function%20%28e%29%20%7B%0A%20%20%20%20%20%20%20%20__download_invoice_call%20%3D%20null%0A%20%20%20%20%20%20%20%20if%20%28empty%28extractDataFromArray%28current_user%2C%20%5B%27billing_info%27%2C%20%27country%27%5D%29%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20__download_invoice_call%20%3D%20%24%28this%29.data%28%27inv_id%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20showEditBillingInfoPopup%28%29%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20location.href%20%3D%20%22//%22%20+%20__api_domain%20+%20%22/user/services/api%3Fcmd%3DgetInvoicePdf%26inv_id%3D%22%20+%20%24%28this%29.data%28%27inv_id%27%29%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%0A%0A%20%20%20%20%24%28document%29.on%28%22change%22%2C%20%27select%5Bname%3Dcountry%5D%27%2C%20function%20%28e%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28e.target.value%20%3D%3D%20%27IN%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23gstpin_input%22%29.show%28%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23state_input%22%29.show%28%29%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23gstpin_input%22%29.hide%28%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23state_input%22%29.hide%28%29%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%0A%0A%0A%7D%0A%0A%0Afunction%20toggleWatermark%28%29%20%7B%0A%20%20%20%20if%20%28page%20%21%3D%20%27users%27%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28extractDataFromArray%28user_info%2C%20%5B%27plan_info%27%2C%20%27plan%27%5D%2C%20%27FR%27%29%20%3D%3D%20%27FR%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20Swal.fire%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20%27Plan%20Upgrade%20Required%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20html%3A%20%27%3Cdiv%20class%3D%22py-4%22%3EYou%20may%20remove%20the%20watermark%20only%20for%20paid%20plans.%20Please%20go%20to%20the%20%3Ca%20href%3D%22/user/pricing%22%3EPricing%20page%3C/a%3E%20for%20more%20details.%3C/div%3E%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20showCancelButton%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20confirmButtonText%3A%20%22Upgrade%20Now%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20reverseButtons%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%29.then%28result%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28result.isConfirmed%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20location.href%20%3D%20%22/pricing%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20Swal.fire%28%7B%0A%20%20%20%20%20%20%20%20title%3A%20%27Remove%20Watermark%27%2C%0A%20%20%20%20%20%20%20%20text%3A%20%27Do%20you%20want%20to%20change%3F%27%2C%0A%20%20%20%20%20%20%20%20showCancelButton%3A%20true%2C%0A%20%20%20%20%20%20%20%20reverseButtons%3A%20true%2C%0A%20%20%20%20%20%20%20%20confirmButtonText%3A%20%22Confirm%22%0A%20%20%20%20%7D%29.then%28result%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20%28result.isConfirmed%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20cmd%3A%20%27toggleWatermark%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20user_id%3A%20getUrlParameterByName%28%27user_id%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28page%20%3D%3D%20%27users%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20data.value%20%3D%20%24%28%22%23show_watermark%22%29.prop%28%22checked%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20data.value%20%3D%20%24%28%22%23qr_watermark%22%29.text%28%29%20%3D%3D%20%27Yes%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%24.post%28%22//%22%20+%20__api_domain%20+%20%27/user/services/api%27%2C%20data%2C%20function%20%28response%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%24%28%22%23qr_watermark%22%29.text%28%29%20%3D%3D%20%27Yes%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23qr_watermark%22%29.text%28%27No%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23qr_watermark%22%29.text%28%27Yes%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20SwalPopup.showSingleButtonPopup%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20icon%3A%20%27success%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20text%3A%20%27Updated%20successfully%21%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28page%20%3D%3D%20%27users%27%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23show_watermark%22%29.prop%28%22checked%22%2C%20%21%24%28%22%23show_watermark%22%29.prop%28%22checked%22%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%0A%7D%0A%0Afunction%20changeLocale%28%29%20%7B%0A%20%20%20%20Swal.fire%28%7B%0A%20%20%20%20%20%20%20%20title%3A%20%27Change%20Locale%27%2C%0A%20%20%20%20%20%20%20%20text%3A%20%27Do%20you%20want%20to%20change%3F%27%2C%0A%20%20%20%20%20%20%20%20showCancelButton%3A%20true%2C%0A%20%20%20%20%20%20%20%20reverseButtons%3A%20true%2C%0A%20%20%20%20%20%20%20%20confirmButtonText%3A%20%22Confirm%22%0A%20%20%20%20%7D%29.then%28result%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20%28result.isConfirmed%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20locale%20%3D%20%24%28%22%23locale_select%22%29.val%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20cmd%3A%20%27updateProfile%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20user_id%3A%20getUrlParameterByName%28%27user_id%27%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20formData%3A%20JSON.stringify%28%7B%20locale%2C%20redirect_domain%3A%20locale%20+%20%22.qrcodechimp.com%22%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%24.post%28%22//%22%20+%20__api_domain%20+%20%27/user/services/api%27%2C%20data%2C%20function%20%28response%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20SwalPopup.showSingleButtonPopup%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20icon%3A%20%27success%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20text%3A%20%27Updated%20successfully%21%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%20%28%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20location.href%20%3D%20location.href.replace%28location.host%2C%20locale%20+%20%22.qrcodechimp.com%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%0A%7D%0A%0Afunction%20toggleSvgDownload%28%29%20%7B%0A%0A%20%20%20%20Swal.fire%28%7B%0A%20%20%20%20%20%20%20%20title%3A%20%27SVG%20Download%20Option%27%2C%0A%20%20%20%20%20%20%20%20text%3A%20%27Do%20you%20want%20to%20toggle%20the%20option%3F%27%2C%0A%20%20%20%20%20%20%20%20showCancelButton%3A%20true%2C%0A%20%20%20%20%20%20%20%20reverseButtons%3A%20true%2C%0A%20%20%20%20%20%20%20%20confirmButtonText%3A%20%22Confirm%22%0A%20%20%20%20%7D%29.then%28result%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20%28result.isConfirmed%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20cmd%3A%20%27toggleSvgDownload%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20user_id%3A%20getUrlParameterByName%28%27user_id%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20data.value%20%3D%20%24%28%22%23svg_download%22%29.prop%28%22checked%22%29%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%24.post%28%22//%22%20+%20__api_domain%20+%20%27/user/services/api%27%2C%20data%2C%20function%20%28response%29%20%7B%0A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20SwalPopup.showSingleButtonPopup%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20icon%3A%20%27success%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20text%3A%20%27Updated%20successfully%21%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23svg_download%22%29.prop%28%22checked%22%2C%20%21%24%28%22%23svg_download%22%29.prop%28%22checked%22%29%29%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%0A%7D%0A%0A//%20const%20countryCodeToName%20%3D%20%7B%0A//%20%20%20%20%20%22BD%22%3A%20%22Bangladesh%22%2C%0A//%20%20%20%20%20%22BE%22%3A%20%22Belgium%22%2C%0A//%20%20%20%20%20%22BF%22%3A%20%22Burkina%20Faso%22%2C%0A//%20%20%20%20%20%22BG%22%3A%20%22Bulgaria%22%2C%0A//%20%20%20%20%20%22BA%22%3A%20%22Bosnia%20and%20Herzegovina%22%2C%0A//%20%20%20%20%20%22BN%22%3A%20%22Brunei%22%2C%0A//%20%20%20%20%20%22BO%22%3A%20%22Bolivia%22%2C%0A//%20%20%20%20%20%22JP%22%3A%20%22Japan%22%2C%0A//%20%20%20%20%20%22BI%22%3A%20%22Burundi%22%2C%0A//%20%20%20%20%20%22BJ%22%3A%20%22Benin%22%2C%0A//%20%20%20%20%20%22BT%22%3A%20%22Bhutan%22%2C%0A//%20%20%20%20%20%22JM%22%3A%20%22Jamaica%22%2C%0A//%20%20%20%20%20%22BW%22%3A%20%22Botswana%22%2C%0A//%20%20%20%20%20%22BR%22%3A%20%22Brazil%22%2C%0A//%20%20%20%20%20%22BS%22%3A%20%22The%20Bahamas%22%2C%0A//%20%20%20%20%20%22BY%22%3A%20%22Belarus%22%2C%0A//%20%20%20%20%20%22BZ%22%3A%20%22Belize%22%2C%0A//%20%20%20%20%20%22RU%22%3A%20%22Russia%22%2C%0A//%20%20%20%20%20%22RW%22%3A%20%22Rwanda%22%2C%0A//%20%20%20%20%20%22RS%22%3A%20%22Republic%20of%20Serbia%22%2C%0A//%20%20%20%20%20%22LT%22%3A%20%22Lithuania%22%2C%0A//%20%20%20%20%20%22LU%22%3A%20%22Luxembourg%22%2C%0A//%20%20%20%20%20%22LR%22%3A%20%22Liberia%22%2C%0A//%20%20%20%20%20%22RO%22%3A%20%22Romania%22%2C%0A//%20%20%20%20%20%22GW%22%3A%20%22Guinea%20Bissau%22%2C%0A//%20%20%20%20%20%22GT%22%3A%20%22Guatemala%22%2C%0A//%20%20%20%20%20%22GR%22%3A%20%22Greece%22%2C%0A//%20%20%20%20%20%22GQ%22%3A%20%22Equatorial%20Guinea%22%2C%0A//%20%20%20%20%20%22GY%22%3A%20%22Guyana%22%2C%0A//%20%20%20%20%20%22GE%22%3A%20%22Georgia%22%2C%0A//%20%20%20%20%20%22GB%22%3A%20%22United%20Kingdom%22%2C%0A//%20%20%20%20%20%22GA%22%3A%20%22Gabon%22%2C%0A//%20%20%20%20%20%22GN%22%3A%20%22Guinea%22%2C%0A//%20%20%20%20%20%22GM%22%3A%20%22Gambia%22%2C%0A//%20%20%20%20%20%22GL%22%3A%20%22Greenland%22%2C%0A//%20%20%20%20%20%22KW%22%3A%20%22Kuwait%22%2C%0A//%20%20%20%20%20%22GH%22%3A%20%22Ghana%22%2C%0A//%20%20%20%20%20%22OM%22%3A%20%22Oman%22%2C%0A//%20%20%20%20%20%22_3%22%3A%20%22Somaliland%22%2C%0A//%20%20%20%20%20%22EH%22%3A%20%22Western%20Sahara%22%2C%0A//%20%20%20%20%20%22XK%22%3A%20%22Kosovo%22%2C%0A//%20%20%20%20%20%22_0%22%3A%20%22Northern%20Cyprus%22%2C%0A//%20%20%20%20%20%22JO%22%3A%20%22Jordan%22%2C%0A//%20%20%20%20%20%22HR%22%3A%20%22Croatia%22%2C%0A//%20%20%20%20%20%22HT%22%3A%20%22Haiti%22%2C%0A//%20%20%20%20%20%22HU%22%3A%20%22Hungary%22%2C%0A//%20%20%20%20%20%22HN%22%3A%20%22Honduras%22%2C%0A//%20%20%20%20%20%22PR%22%3A%20%22Puerto%20Rico%22%2C%0A//%20%20%20%20%20%22PS%22%3A%20%22West%20Bank%22%2C%0A//%20%20%20%20%20%22PT%22%3A%20%22Portugal%22%2C%0A//%20%20%20%20%20%22PY%22%3A%20%22Paraguay%22%2C%0A//%20%20%20%20%20%22PA%22%3A%20%22Panama%22%2C%0A//%20%20%20%20%20%22PG%22%3A%20%22Papua%20New%20Guinea%22%2C%0A//%20%20%20%20%20%22PE%22%3A%20%22Peru%22%2C%0A//%20%20%20%20%20%22PK%22%3A%20%22Pakistan%22%2C%0A//%20%20%20%20%20%22PH%22%3A%20%22Philippines%22%2C%0A//%20%20%20%20%20%22PL%22%3A%20%22Poland%22%2C%0A//%20%20%20%20%20%22ZM%22%3A%20%22Zambia%22%2C%0A//%20%20%20%20%20%22EE%22%3A%20%22Estonia%22%2C%0A//%20%20%20%20%20%22EG%22%3A%20%22Egypt%22%2C%0A//%20%20%20%20%20%22ZA%22%3A%20%22South%20Africa%22%2C%0A//%20%20%20%20%20%22EC%22%3A%20%22Ecuador%22%2C%0A//%20%20%20%20%20%22AL%22%3A%20%22Albania%22%2C%0A//%20%20%20%20%20%22AO%22%3A%20%22Angola%22%2C%0A//%20%20%20%20%20%22KZ%22%3A%20%22Kazakhstan%22%2C%0A//%20%20%20%20%20%22ET%22%3A%20%22Ethiopia%22%2C%0A//%20%20%20%20%20%22ZW%22%3A%20%22Zimbabwe%22%2C%0A//%20%20%20%20%20%22ES%22%3A%20%22Spain%22%2C%0A//%20%20%20%20%20%22ER%22%3A%20%22Eritrea%22%2C%0A//%20%20%20%20%20%22ME%22%3A%20%22Montenegro%22%2C%0A//%20%20%20%20%20%22MD%22%3A%20%22Moldova%22%2C%0A//%20%20%20%20%20%22MG%22%3A%20%22Madagascar%22%2C%0A//%20%20%20%20%20%22MA%22%3A%20%22Morocco%22%2C%0A//%20%20%20%20%20%22UZ%22%3A%20%22Uzbekistan%22%2C%0A//%20%20%20%20%20%22MM%22%3A%20%22Myanmar%22%2C%0A//%20%20%20%20%20%22ML%22%3A%20%22Mali%22%2C%0A//%20%20%20%20%20%22MN%22%3A%20%22Mongolia%22%2C%0A//%20%20%20%20%20%22MK%22%3A%20%22Macedonia%22%2C%0A//%20%20%20%20%20%22MW%22%3A%20%22Malawi%22%2C%0A//%20%20%20%20%20%22MR%22%3A%20%22Mauritania%22%2C%0A//%20%20%20%20%20%22UG%22%3A%20%22Uganda%22%2C%0A//%20%20%20%20%20%22MY%22%3A%20%22Malaysia%22%2C%0A//%20%20%20%20%20%22MX%22%3A%20%22Mexico%22%2C%0A//%20%20%20%20%20%22VU%22%3A%20%22Vanuatu%22%2C%0A//%20%20%20%20%20%22FR%22%3A%20%22France%22%2C%0A//%20%20%20%20%20%22FI%22%3A%20%22Finland%22%2C%0A//%20%20%20%20%20%22FJ%22%3A%20%22Fiji%22%2C%0A//%20%20%20%20%20%22FK%22%3A%20%22Falkland%20Islands%22%2C%0A//%20%20%20%20%20%22NI%22%3A%20%22Nicaragua%22%2C%0A//%20%20%20%20%20%22NL%22%3A%20%22Netherlands%22%2C%0A//%20%20%20%20%20%22NO%22%3A%20%22Norway%22%2C%0A//%20%20%20%20%20%22NA%22%3A%20%22Namibia%22%2C%0A//%20%20%20%20%20%22NC%22%3A%20%22New%20Caledonia%22%2C%0A//%20%20%20%20%20%22NE%22%3A%20%22Niger%22%2C%0A//%20%20%20%20%20%22NG%22%3A%20%22Nigeria%22%2C%0A//%20%20%20%20%20%22NZ%22%3A%20%22New%20Zealand%22%2C%0A//%20%20%20%20%20%22NP%22%3A%20%22Nepal%22%2C%0A//%20%20%20%20%20%22CI%22%3A%20%22Ivory%20Coast%22%2C%0A//%20%20%20%20%20%22CH%22%3A%20%22Switzerland%22%2C%0A//%20%20%20%20%20%22CO%22%3A%20%22Colombia%22%2C%0A//%20%20%20%20%20%22CN%22%3A%20%22China%22%2C%0A//%20%20%20%20%20%22CM%22%3A%20%22Cameroon%22%2C%0A//%20%20%20%20%20%22CL%22%3A%20%22Chile%22%2C%0A//%20%20%20%20%20%22CA%22%3A%20%22Canada%22%2C%0A//%20%20%20%20%20%22CG%22%3A%20%22Republic%20of%20the%20Congo%22%2C%0A//%20%20%20%20%20%22CF%22%3A%20%22Central%20African%20Republic%22%2C%0A//%20%20%20%20%20%22CD%22%3A%20%22Democratic%20Republic%20of%20the%20Congo%22%2C%0A//%20%20%20%20%20%22CZ%22%3A%20%22Czech%20Republic%22%2C%0A//%20%20%20%20%20%22CY%22%3A%20%22Cyprus%22%2C%0A//%20%20%20%20%20%22CR%22%3A%20%22Costa%20Rica%22%2C%0A//%20%20%20%20%20%22CU%22%3A%20%22Cuba%22%2C%0A//%20%20%20%20%20%22SZ%22%3A%20%22Swaziland%22%2C%0A//%20%20%20%20%20%22SY%22%3A%20%22Syria%22%2C%0A//%20%20%20%20%20%22KG%22%3A%20%22Kyrgyzstan%22%2C%0A//%20%20%20%20%20%22KE%22%3A%20%22Kenya%22%2C%0A//%20%20%20%20%20%22SS%22%3A%20%22South%20Sudan%22%2C%0A//%20%20%20%20%20%22SR%22%3A%20%22Suriname%22%2C%0A//%20%20%20%20%20%22KH%22%3A%20%22Cambodia%22%2C%0A//%20%20%20%20%20%22SV%22%3A%20%22El%20Salvador%22%2C%0A//%20%20%20%20%20%22SK%22%3A%20%22Slovakia%22%2C%0A//%20%20%20%20%20%22KR%22%3A%20%22South%20Korea%22%2C%0A//%20%20%20%20%20%22SI%22%3A%20%22Slovenia%22%2C%0A//%20%20%20%20%20%22KP%22%3A%20%22North%20Korea%22%2C%0A//%20%20%20%20%20%22SO%22%3A%20%22Somalia%22%2C%0A//%20%20%20%20%20%22SN%22%3A%20%22Senegal%22%2C%0A//%20%20%20%20%20%22SL%22%3A%20%22Sierra%20Leone%22%2C%0A//%20%20%20%20%20%22SB%22%3A%20%22Solomon%20Islands%22%2C%0A//%20%20%20%20%20%22SA%22%3A%20%22Saudi%20Arabia%22%2C%0A//%20%20%20%20%20%22SE%22%3A%20%22Sweden%22%2C%0A//%20%20%20%20%20%22SD%22%3A%20%22Sudan%22%2C%0A//%20%20%20%20%20%22DO%22%3A%20%22Dominican%20Republic%22%2C%0A//%20%20%20%20%20%22DJ%22%3A%20%22Djibouti%22%2C%0A//%20%20%20%20%20%22DK%22%3A%20%22Denmark%22%2C%0A//%20%20%20%20%20%22DE%22%3A%20%22Germany%22%2C%0A//%20%20%20%20%20%22YE%22%3A%20%22Yemen%22%2C%0A//%20%20%20%20%20%22AT%22%3A%20%22Austria%22%2C%0A//%20%20%20%20%20%22DZ%22%3A%20%22Algeria%22%2C%0A//%20%20%20%20%20%22US%22%3A%20%22United%20States%20of%20America%22%2C%0A//%20%20%20%20%20%22LV%22%3A%20%22Latvia%22%2C%0A//%20%20%20%20%20%22UY%22%3A%20%22Uruguay%22%2C%0A//%20%20%20%20%20%22LB%22%3A%20%22Lebanon%22%2C%0A//%20%20%20%20%20%22LA%22%3A%20%22Laos%22%2C%0A//%20%20%20%20%20%22TW%22%3A%20%22Taiwan%22%2C%0A//%20%20%20%20%20%22TT%22%3A%20%22Trinidad%20and%20Tobago%22%2C%0A//%20%20%20%20%20%22TR%22%3A%20%22Turkey%22%2C%0A//%20%20%20%20%20%22LK%22%3A%20%22Sri%20Lanka%22%2C%0A//%20%20%20%20%20%22TN%22%3A%20%22Tunisia%22%2C%0A//%20%20%20%20%20%22TL%22%3A%20%22East%20Timor%22%2C%0A//%20%20%20%20%20%22TM%22%3A%20%22Turkmenistan%22%2C%0A//%20%20%20%20%20%22TJ%22%3A%20%22Tajikistan%22%2C%0A//%20%20%20%20%20%22LS%22%3A%20%22Lesotho%22%2C%0A//%20%20%20%20%20%22TH%22%3A%20%22Thailand%22%2C%0A//%20%20%20%20%20%22TF%22%3A%20%22French%20Southern%20and%20Antarctic%20Lands%22%2C%0A//%20%20%20%20%20%22TG%22%3A%20%22Togo%22%2C%0A//%20%20%20%20%20%22TD%22%3A%20%22Chad%22%2C%0A//%20%20%20%20%20%22LY%22%3A%20%22Libya%22%2C%0A//%20%20%20%20%20%22AE%22%3A%20%22United%20Arab%20Emirates%22%2C%0A//%20%20%20%20%20%22VE%22%3A%20%22Venezuela%22%2C%0A//%20%20%20%20%20%22AF%22%3A%20%22Afghanistan%22%2C%0A//%20%20%20%20%20%22IQ%22%3A%20%22Iraq%22%2C%0A//%20%20%20%20%20%22IS%22%3A%20%22Iceland%22%2C%0A//%20%20%20%20%20%22IR%22%3A%20%22Iran%22%2C%0A//%20%20%20%20%20%22AM%22%3A%20%22Armenia%22%2C%0A//%20%20%20%20%20%22IT%22%3A%20%22Italy%22%2C%0A//%20%20%20%20%20%22VN%22%3A%20%22Vietnam%22%2C%0A//%20%20%20%20%20%22AR%22%3A%20%22Argentina%22%2C%0A//%20%20%20%20%20%22AU%22%3A%20%22Australia%22%2C%0A//%20%20%20%20%20%22IL%22%3A%20%22Israel%22%2C%0A//%20%20%20%20%20%22IN%22%3A%20%22India%22%2C%0A//%20%20%20%20%20%22TZ%22%3A%20%22Tanzania%22%2C%0A//%20%20%20%20%20%22AZ%22%3A%20%22Azerbaijan%22%2C%0A//%20%20%20%20%20%22IE%22%3A%20%22Ireland%22%2C%0A//%20%20%20%20%20%22ID%22%3A%20%22Indonesia%22%2C%0A//%20%20%20%20%20%22UA%22%3A%20%22Ukraine%22%2C%0A//%20%20%20%20%20%22QA%22%3A%20%22Qatar%22%2C%0A//%20%20%20%20%20%22MZ%22%3A%20%22Mozambique%22%0A//%20%7D%0A%0Aconst%20countryCodeToName%20%3D%20%7B%0A%20%20%20%20%22BB%22%20%3A%20%22Barbados%22%2C%0A%20%20%20%20%22BD%22%20%3A%20%22Bangladesh%22%2C%0A%20%20%20%20%22BE%22%20%3A%20%22Belgium%22%2C%0A%20%20%20%20%22BF%22%20%3A%20%22Burkina%20Faso%22%2C%0A%20%20%20%20%22BG%22%20%3A%20%22Bulgaria%22%2C%0A%20%20%20%20%22BA%22%20%3A%20%22Bosnia%20and%20Herzegovina%22%2C%0A%20%20%20%20%22BN%22%20%3A%20%22Brunei%22%2C%0A%20%20%20%20%22BO%22%20%3A%20%22Bolivia%22%2C%0A%20%20%20%20%22JP%22%20%3A%20%22Japan%22%2C%0A%20%20%20%20%22BI%22%20%3A%20%22Burundi%22%2C%0A%20%20%20%20%22BJ%22%20%3A%20%22Benin%22%2C%0A%20%20%20%20%22BT%22%20%3A%20%22Bhutan%22%2C%0A%20%20%20%20%22JM%22%20%3A%20%22Jamaica%22%2C%0A%20%20%20%20%22BW%22%20%3A%20%22Botswana%22%2C%0A%20%20%20%20%22BR%22%20%3A%20%22Brazil%22%2C%0A%20%20%20%20%22BS%22%20%3A%20%22The%20Bahamas%22%2C%0A%20%20%20%20%22BY%22%20%3A%20%22Belarus%22%2C%0A%20%20%20%20%22BZ%22%20%3A%20%22Belize%22%2C%0A%20%20%20%20%22RU%22%20%3A%20%22Russia%22%2C%0A%20%20%20%20%22RW%22%20%3A%20%22Rwanda%22%2C%0A%20%20%20%20%22RS%22%20%3A%20%22Republic%20of%20Serbia%22%2C%0A%20%20%20%20%22LT%22%20%3A%20%22Lithuania%22%2C%0A%20%20%20%20%22LU%22%20%3A%20%22Luxembourg%22%2C%0A%20%20%20%20%22LR%22%20%3A%20%22Liberia%22%2C%0A%20%20%20%20%22RO%22%20%3A%20%22Romania%22%2C%0A%20%20%20%20%22GW%22%20%3A%20%22Guinea%20Bissau%22%2C%0A%20%20%20%20%22GT%22%20%3A%20%22Guatemala%22%2C%0A%20%20%20%20%22GR%22%20%3A%20%22Greece%22%2C%0A%20%20%20%20%22GQ%22%20%3A%20%22Equatorial%20Guinea%22%2C%0A%20%20%20%20%22GY%22%20%3A%20%22Guyana%22%2C%0A%20%20%20%20%22GE%22%20%3A%20%22Georgia%22%2C%0A%20%20%20%20%22GB%22%20%3A%20%22United%20Kingdom%22%2C%0A%20%20%20%20%22GA%22%20%3A%20%22Gabon%22%2C%0A%20%20%20%20%22GN%22%20%3A%20%22Guinea%22%2C%0A%20%20%20%20%22GM%22%20%3A%20%22Gambia%22%2C%0A%20%20%20%20%22GL%22%20%3A%20%22Greenland%22%2C%0A%20%20%20%20%22KW%22%20%3A%20%22Kuwait%22%2C%0A//%20%20%20%20%22GH%22%20%3A%20%22Ghana%22%2C%0A%20%20%20%20%22OM%22%20%3A%20%22Oman%22%2C%0A//%20%20%20%20%22_3%22%20%3A%20%22Somaliland%22%2C%0A//%20%20%20%20%22EH%22%20%3A%20%22Western%20Sahara%22%2C%0A%20%20%20%20%22xk%22%20%3A%20%22Kosovo%22%2C%0A%20%20%20%20%22_0%22%20%3A%20%22Northern%20Cyprus%22%2C%0A%20%20%20%20%22JO%22%20%3A%20%22Jordan%22%2C%0A%20%20%20%20%22HR%22%20%3A%20%22Croatia%22%2C%0A//%20%20%20%20%22HT%22%20%3A%20%22Haiti%22%2C%0A%20%20%20%20%22HU%22%20%3A%20%22Hungary%22%2C%0A%20%20%20%20%22HN%22%20%3A%20%22Honduras%22%2C%0A%20%20%20%20%22PR%22%20%3A%20%22Puerto%20Rico%22%2C%0A%20%20%20%20%22PS%22%20%3A%20%22West%20Bank%22%2C%0A%20%20%20%20%22PT%22%20%3A%20%22Portugal%22%2C%0A%20%20%20%20%22PY%22%20%3A%20%22Paraguay%22%2C%0A%20%20%20%20%22PA%22%20%3A%20%22Panama%22%2C%0A%20%20%20%20%22PG%22%20%3A%20%22Papua%20New%20Guinea%22%2C%0A%20%20%20%20%22PE%22%20%3A%20%22Peru%22%2C%0A%20%20%20%20%22PK%22%20%3A%20%22Pakistan%22%2C%0A%20%20%20%20%22PH%22%20%3A%20%22Philippines%22%2C%0A%20%20%20%20%22PL%22%20%3A%20%22Poland%22%2C%0A//%20%20%20%20%22ZM%22%20%3A%20%22Zambia%22%2C%0A%20%20%20%20%22EE%22%20%3A%20%22Estonia%22%2C%0A%20%20%20%20%22EG%22%20%3A%20%22Egypt%22%2C%0A%20%20%20%20%22ZA%22%20%3A%20%22South%20Africa%22%2C%0A//%20%20%20%20%22EC%22%20%3A%20%22Ecuador%22%2C%0A%20%20%20%20%22AL%22%20%3A%20%22Albania%22%2C%0A//%20%20%20%20%22AO%22%20%3A%20%22Angola%22%2C%0A%20%20%20%20%22KZ%22%20%3A%20%22Kazakhstan%22%2C%0A%20%20%20%20%22ET%22%20%3A%20%22Ethiopia%22%2C%0A%20%20%20%20%22ZW%22%20%3A%20%22Zimbabwe%22%2C%0A%20%20%20%20%22ES%22%20%3A%20%22Spain%22%2C%0A%20%20%20%20%22ER%22%20%3A%20%22Eritrea%22%2C%0A%20%20%20%20%22ME%22%20%3A%20%22Montenegro%22%2C%0A%20%20%20%20%22MD%22%20%3A%20%22Moldova%22%2C%0A%20%20%20%20%22MG%22%20%3A%20%22Madagascar%22%2C%0A%20%20%20%20%22MA%22%20%3A%20%22Morocco%22%2C%0A%20%20%20%20%22UZ%22%20%3A%20%22Uzbekistan%22%2C%0A%20%20%20%20%22MM%22%20%3A%20%22Myanmar%22%2C%0A%20%20%20%20%22ML%22%20%3A%20%22Mali%22%2C%0A%20%20%20%20%22MN%22%20%3A%20%22Mongolia%22%2C%0A%20%20%20%20%22MK%22%20%3A%20%22Macedonia%22%2C%0A%20%20%20%20%22MW%22%20%3A%20%22Malawi%22%2C%0A%20%20%20%20%22MR%22%20%3A%20%22Mauritania%22%2C%0A//%20%20%20%20%22UG%22%20%3A%20%22Uganda%22%2C%0A%20%20%20%20%22MY%22%20%3A%20%22Malaysia%22%2C%0A%20%20%20%20%22MX%22%20%3A%20%22Mexico%22%2C%0A%20%20%20%20%22VU%22%20%3A%20%22Vanuatu%22%2C%0A%20%20%20%20%22FR%22%20%3A%20%22France%22%2C%0A%20%20%20%20%22FI%22%20%3A%20%22Finland%22%2C%0A%20%20%20%20%22FJ%22%20%3A%20%22Fiji%22%2C%0A%20%20%20%20%22FK%22%20%3A%20%22Falkland%20Islands%22%2C%0A%20%20%20%20%22NI%22%20%3A%20%22Nicaragua%22%2C%0A%20%20%20%20%22NL%22%20%3A%20%22Netherlands%22%2C%0A%20%20%20%20%22NO%22%20%3A%20%22Norway%22%2C%0A%20%20%20%20%22NA%22%20%3A%20%22Namibia%22%2C%0A%20%20%20%20%22NC%22%20%3A%20%22New%20Caledonia%22%2C%0A//%20%20%20%20%22NE%22%20%3A%20%22Niger%22%2C%0A//%20%20%20%20%22NG%22%20%3A%20%22Nigeria%22%2C%0A%20%20%20%20%22NZ%22%20%3A%20%22New%20Zealand%22%2C%0A%20%20%20%20%22NP%22%20%3A%20%22Nepal%22%2C%0A%20%20%20%20%22CI%22%20%3A%20%22Ivory%20Coast%22%2C%0A%20%20%20%20%22CH%22%20%3A%20%22Switzerland%22%2C%0A%20%20%20%20%22CO%22%20%3A%20%22Colombia%22%2C%0A%20%20%20%20%22CN%22%20%3A%20%22China%22%2C%0A%20%20%20%20%22CM%22%20%3A%20%22Cameroon%22%2C%0A%20%20%20%20%22CL%22%20%3A%20%22Chile%22%2C%0A%20%20%20%20%22CA%22%20%3A%20%22Canada%22%2C%0A//%20%20%20%20%22CG%22%20%3A%20%22Republic%20of%20the%20Congo%22%2C%0A//%20%20%20%20%22CF%22%20%3A%20%22Central%20African%20Republic%22%2C%0A//%20%20%20%20%22CD%22%20%3A%20%22Democratic%20Republic%20of%20the%20Congo%22%2C%0A%20%20%20%20%22CZ%22%20%3A%20%22Czech%20Republic%22%2C%0A%20%20%20%20%22CY%22%20%3A%20%22Cyprus%22%2C%0A%20%20%20%20%22CR%22%20%3A%20%22Costa%20Rica%22%2C%0A%20%20%20%20%22CU%22%20%3A%20%22Cuba%22%2C%0A%20%20%20%20%22SZ%22%20%3A%20%22Swaziland%22%2C%0A%20%20%20%20%22SY%22%20%3A%20%22Syria%22%2C%0A%20%20%20%20%22KG%22%20%3A%20%22Kyrgyzstan%22%2C%0A//%20%20%20%20%22KE%22%20%3A%20%22Kenya%22%2C%0A//%20%20%20%20%22SS%22%20%3A%20%22South%20Sudan%22%2C%0A%20%20%20%20%22SR%22%20%3A%20%22Suriname%22%2C%0A%20%20%20%20%22KH%22%20%3A%20%22Cambodia%22%2C%0A%20%20%20%20%22SV%22%20%3A%20%22El%20Salvador%22%2C%0A%20%20%20%20%22SK%22%20%3A%20%22Slovakia%22%2C%0A%20%20%20%20%22KR%22%20%3A%20%22South%20Korea%22%2C%0A%20%20%20%20%22SI%22%20%3A%20%22Slovenia%22%2C%0A%20%20%20%20%22KP%22%20%3A%20%22North%20Korea%22%2C%0A//%20%20%20%20%22SO%22%20%3A%20%22Somalia%22%2C%0A%20%20%20%20%22SN%22%20%3A%20%22Senegal%22%2C%0A%20%20%20%20%22SL%22%20%3A%20%22Sierra%20Leone%22%2C%0A%20%20%20%20%22SB%22%20%3A%20%22Solomon%20Islands%22%2C%0A%20%20%20%20%22SA%22%20%3A%20%22Saudi%20Arabia%22%2C%0A%20%20%20%20%22SE%22%20%3A%20%22Sweden%22%2C%0A%20%20%20%20%22SD%22%20%3A%20%22Sudan%22%2C%0A%20%20%20%20%22SG%22%20%3A%20%22Singapore%22%2C%0A%20%20%20%20%22DO%22%20%3A%20%22Dominican%20Republic%22%2C%0A%20%20%20%20%22DJ%22%20%3A%20%22Djibouti%22%2C%0A%20%20%20%20%22DK%22%20%3A%20%22Denmark%22%2C%0A%20%20%20%20%22DE%22%20%3A%20%22Germany%22%2C%0A%20%20%20%20%22YE%22%20%3A%20%22Yemen%22%2C%0A%20%20%20%20%22AT%22%20%3A%20%22Austria%22%2C%0A//%20%20%20%20%22DZ%22%20%3A%20%22Algeria%22%2C%0A%20%20%20%20%22US%22%20%3A%20%22United%20States%20of%20America%22%2C%0A%20%20%20%20%22LV%22%20%3A%20%22Latvia%22%2C%0A%20%20%20%20%22UY%22%20%3A%20%22Uruguay%22%2C%0A%20%20%20%20%22LB%22%20%3A%20%22Lebanon%22%2C%0A%20%20%20%20%22LA%22%20%3A%20%22Laos%22%2C%0A%20%20%20%20%22TW%22%20%3A%20%22Taiwan%22%2C%0A%20%20%20%20%22TT%22%20%3A%20%22Trinidad%20and%20Tobago%22%2C%0A%20%20%20%20%22TR%22%20%3A%20%22Turkey%22%2C%0A%20%20%20%20%22LK%22%20%3A%20%22Sri%20Lanka%22%2C%0A%20%20%20%20%22TN%22%20%3A%20%22Tunisia%22%2C%0A%20%20%20%20%22TL%22%20%3A%20%22East%20Timor%22%2C%0A%20%20%20%20%22TM%22%20%3A%20%22Turkmenistan%22%2C%0A%20%20%20%20%22TJ%22%20%3A%20%22Tajikistan%22%2C%0A%20%20%20%20%22LS%22%20%3A%20%22Lesotho%22%2C%0A%20%20%20%20%22TH%22%20%3A%20%22Thailand%22%2C%0A%20%20%20%20%22TF%22%20%3A%20%22French%20Southern%20and%20Antarctic%20Lands%22%2C%0A//%20%20%20%20%22TG%22%20%3A%20%22Togo%22%2C%0A//%20%20%20%20%22TD%22%20%3A%20%22Chad%22%2C%0A//%20%20%20%20%22LY%22%20%3A%20%22Libya%22%2C%0A%20%20%20%20%22AE%22%20%3A%20%22United%20Arab%20Emirates%22%2C%0A%20%20%20%20%22VE%22%20%3A%20%22Venezuela%22%2C%0A%20%20%20%20%22AF%22%20%3A%20%22Afghanistan%22%2C%0A%20%20%20%20%22IQ%22%20%3A%20%22Iraq%22%2C%0A%20%20%20%20%22IS%22%20%3A%20%22Iceland%22%2C%0A%20%20%20%20%22IR%22%20%3A%20%22Iran%22%2C%0A%20%20%20%20%22AM%22%20%3A%20%22Armenia%22%2C%0A%20%20%20%20%22IT%22%20%3A%20%22Italy%22%2C%0A%20%20%20%20%22VN%22%20%3A%20%22Vietnam%22%2C%0A%20%20%20%20%22AR%22%20%3A%20%22Argentina%22%2C%0A%20%20%20%20%22AU%22%20%3A%20%22Australia%22%2C%0A%20%20%20%20%22IL%22%20%3A%20%22Israel%22%2C%0A%20%20%20%20%22IN%22%20%3A%20%22India%22%2C%0A%20%20%20%20%22TZ%22%20%3A%20%22Tanzania%22%2C%0A%20%20%20%20%22AZ%22%20%3A%20%22Azerbaijan%22%2C%0A%20%20%20%20%22IE%22%20%3A%20%22Ireland%22%2C%0A%20%20%20%20%22ID%22%20%3A%20%22Indonesia%22%2C%0A%20%20%20%20%22UA%22%20%3A%20%22Ukraine%22%2C%0A%20%20%20%20%22QA%22%20%3A%20%22Qatar%22%2C%0A%20%20%20%20%22MZ%22%20%3A%20%22Mozambique%22%0A%7D%0A%0Aconst%20IndianStateNames%20%3D%20%5B%0A%20%20%20%20%22Andhra%20Pradesh%22%2C%0A%20%20%20%20%22Arunachal%20Pradesh%22%2C%0A%20%20%20%20%22Assam%22%2C%0A%20%20%20%20%22Bihar%22%2C%0A%20%20%20%20%22Chandigarh%22%2C%0A%20%20%20%20%22Chhattisgarh%22%2C%0A%20%20%20%20%22Dadra%20and%20Nagar%20Haveli%20and%20Daman%20and%20Diu%22%2C%0A%20%20%20%20%22Delhi%22%2C%0A%20%20%20%20%22Goa%22%2C%0A%20%20%20%20%22Gujarat%22%2C%0A%20%20%20%20%22Haryana%22%2C%0A%20%20%20%20%22Himachal%20Pradesh%22%2C%0A%20%20%20%20%22Jammu%20and%20Kashmir%22%2C%0A%20%20%20%20%22Jharkhand%22%2C%0A%20%20%20%20%22Karnataka%22%2C%0A%20%20%20%20%22Kerala%22%2C%0A%20%20%20%20%22Ladakh%22%2C%0A%20%20%20%20%22Lakshadweep%22%2C%0A%20%20%20%20%22Madhya%20Pradesh%22%2C%0A%20%20%20%20%22Maharashtra%22%2C%0A%20%20%20%20%22Manipur%22%2C%0A%20%20%20%20%22Meghalaya%22%2C%0A%20%20%20%20%22Mizoram%22%2C%0A%20%20%20%20%22Nagaland%22%2C%0A%20%20%20%20%22Odisha%22%2C%0A%20%20%20%20%22Puducherry%22%2C%0A%20%20%20%20%22Punjab%22%2C%0A%20%20%20%20%22Rajasthan%22%2C%0A%20%20%20%20%22Sikkim%22%2C%0A%20%20%20%20%22Tamil%20Nadu%22%2C%0A%20%20%20%20%22Telangana%22%2C%0A%20%20%20%20%22Tripura%22%2C%0A%20%20%20%20%22Uttar%20Pradesh%22%2C%0A%20%20%20%20%22Uttarakhand%22%2C%0A%20%20%20%20%22West%20Bengal%22%2C%0A%5D%0A%0A%0Aconst%20SiteHeader%20%3D%20%7B%0A%20%20%20%20logo%3A%20%27/assets/images/qrcodechimp-icon.svg%27%2C%0A%20%20%20%20logoClass%3A%20%27%27%2C%0A%20%20%20%20init%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20SiteHeader.checkAndUpdateHeader%28%29%0A%20%20%20%20%20%20%20%20//%20SiteHeader.insertHeader%28%29%0A%20%20%20%20%7D%2C%0A%20%20%20%20checkAndUpdateHeader%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28isUserLoggedIn%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23nav_dashboard_link%22%29.removeClass%28%22d-none%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22.user_profile_header%22%29.addClass%28%22loggedIn%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22.user_profile_header%20.user_profile_icon%22%29.html%28SiteHeader.getUserProfileIconHtml%28%29%29%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22.user_profile_header%22%29.removeClass%28%22loggedIn%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23nav_dashboard_link%22%29.addClass%28%22d-none%22%29%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%2C%0A%20%20%20%20checkAndUpdateClassName%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28extractDataFromArray%28__sidebar_enabled_pages%2C%20%5Bpage%5D%2C%200%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23page_header%22%29.addClass%28%22bg-white%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20SiteHeader.logoClass%20%3D%20%22d-none%22%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%28%22%23page_header%22%29.removeClass%28%22bg-white%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20SiteHeader.logoClass%20%3D%20%22%22%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20SiteHeader.logo%20%3D%20%27/assets/images/qrcode-chimp.svg%27%3B%0A%20%20%20%20%7D%2C%0A%20%20%20%20insertHeader%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20%24%28%22%23page_header%22%29.html%28%60%3Cdiv%20class%3D%22p-0%22%3E%0A%20%20%20%20%20%20%20%20%3Cnav%20class%3D%22navbar%20navbar-expand-md%20justify-content-between%22%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20id%3D%22sidebarCollapse%22%20class%3D%22%60+%20SiteHeader.isSidebarOpened%28%29%20+%20%60%20header_nav_icon%20d-none%22%3E%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22navbar-brand%22%20%3E%3Cimg%20alt%3D%22Qr%20Code%20Chimp%20Logo%22%20loading%3D%22lazy%22%20class%3D%22qr_code_logo_click%20%60+%20SiteHeader.logoClass%20+%20%60%22%20src%3D%22%60%20+%20SiteHeader.logo%20+%20%60%22%20%3E%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22%20ml-auto%20%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cul%20class%3D%22navbar-nav%20chimp_header%20mb-1%20mr-4%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%60+%20SiteHeader.getHeaderNavListHTML%28%29%20+%20%60%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%60+%20SiteHeader.getUserProfileHtml%28%29%20+%20%60%0A%20%20%20%20%20%20%20%20%3C/nav%3E%0A%20%20%20%20%3C/div%3E%60%29%0A%0A%20%20%20%20%7D%2C%0A%20%20%20%20isSidebarOpened%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20//%20Add%20logic%20to%20check%20cookie%20and%20return%20icon%20class%20name%20either%20icon-cross%20or%20icon-menu%0A%20%20%20%20%20%20%20%20return%20%27icon-cross%27%0A%20%20%20%20%7D%2C%0A%20%20%20%20getHeaderNavListHTML%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%3Cli%20class%3D%22nav-item%20%60%20+%20%28page%20%3D%3D%20%27url%27%20%3F%20%27active%27%20%3A%20%27%27%29%20+%20%60%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22nav-link%22%20href%3D%22/%22%3EQR%20Code%20Generator%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cli%20class%3D%22nav-item%20%60%20+%20%28page%20%3D%3D%20%27createTemplate%27%20%3F%20%27active%27%20%3A%20%27%27%29%20+%20%60%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22nav-link%22%20href%3D%22/qr-code-services%22%3EServices%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cli%20class%3D%22nav-item%20%60%20+%20%28isUserLoggedIn%28%29%20%3F%20%27%27%20%3A%20%22d-none%22%29%20+%20%27%20%27%20+%20%28page%20%3D%3D%20%27dashboard%27%20%3F%20%27active%27%20%3A%20%27%27%29%20+%20%60%22%20id%3D%22nav_dashboard_link%22%20%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22nav-link%22%20href%3D%22/user/dashboard%22%3EDashboard%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cli%20class%3D%22nav-item%20%60+%20%28page%20%3D%3D%20%27pricing%27%20%3F%20%27active%27%20%3A%20%27%27%29%20+%20%60%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22nav-link%22%20href%3D%22/pricing%22%3EPricing%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cli%20class%3D%22nav-item%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22nav-link%22%20href%3D%22/articles%22%3EArticles%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cli%20class%3D%22nav-item%20%60+%20%28page%20%3D%3D%20%27faq%27%20%3F%20%27active%27%20%3A%20%27%27%29%20+%20%60%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22nav-link%22%20href%3D%22/qr-codes-faq%22%3EFAQs%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cli%20class%3D%22nav-item%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22nav-link%22%20href%3D%22/contact-us%22%3EContact%20Us%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/li%3E%60%0A%20%20%20%20%7D%2C%0A%20%20%20%20getUserProfileHtml%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20let%20fname%20%3D%20%27%27%2C%20pro_pic%20%3D%20%27%27%2C%20sub_account_rec%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%20%20if%20%28isUserLoggedIn%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20fname%20%3D%20extractDataFromArray%28user_info%2C%20%5B%27fname%27%5D%2C%20%27%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20pro_pic%20%3D%20extractDataFromArray%28user_info%2C%20%5B%27user_img%27%5D%2C%20%22/assets/images/profile_pic.svg%22%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20sub_account_rec%20%3D%20extractDataFromArray%28user_info%2C%20%5B%27sub_account_rec%27%5D%2C%20%5B%5D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21empty%28sub_account_rec%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20fname%20%3D%20extractDataFromArray%28sub_account_rec%2C%20%5B%27name%27%5D%2C%20%27%27%29.split%28%27%20%27%29%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20return%20%60%3Cdiv%20class%3D%22user_profile_header%20%60%20+%20%28page%20%3D%3D%20%27signin%27%20%3F%20%27d-none%27%20%3A%20%27%27%29%20+%20%60%20%60%20+%20%28isUserLoggedIn%28%29%20%3F%20%22loggedIn%22%20%3A%20%22%22%29%20+%20%60%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22collapse%20navbar-collapse%20login_signup%22%20id%3D%22navbarCollapse%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22navbar-nav%20mr-auto%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22form-inline%20mt-2%20mt-md-0%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cbutton%20class%3D%22btn%20btn-outline-primary%20mr-2%20pl-4%20pr-4%22%20data-toggle%3D%22modal%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20data-target%3D%22%23signup-free%22%3ESign%20In%3C/button%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cbutton%20class%3D%22btn%20btn-primary%20%20my-sm-0%20pl-4%20pr-4%22%20data-toggle%3D%22modal%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20data-target%3D%22%23signup-free%22%3ESign%20Up%3C/button%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22ml-auto%20user_profile_icon%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22navbar_notification%20easin%20mr-2%20d-none%20%22%3E%3Ci%20class%3D%22icon-notification%22%3E%3C/i%3E%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22%20easin%20dropdown%22%20%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cbutton%20class%3D%22dropdown-toggle%20navbar_profile_pic%22%20id%3D%22user_profile_dropdown%22%20data-toggle%3D%22dropdown%22%20aria-haspopup%3D%22false%22%20aria-expanded%3D%22false%22%20style%3D%22background-image%3Aurl%28%60+%20pro_pic%20+%20%60%29%22%20%3E%3C/button%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22dropdown-menu%20dropdown-menu-right%22%20aria-labelledby%3D%22user_profile_dropdown%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ch6%20class%3D%22dropdown-header%20border-bottom%22%3E%60+%20fname%20+%20%60%3C/h6%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22dropdown-item%20%60%20+%20%28%21empty%28sub_account_rec%29%20%3F%20%27d-none%27%20%3A%20%27%27%29%20+%20%60%22%20href%3D%22/user/settings%3Fs%3Dprofile%22%20id%3D%22subaccount_nav_dropdown_link%22%3EProfile%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22dropdown-item%20d-none%22%20href%3D%22/user/setting%22%3ESetting%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22dropdown-item%22%20href%3D%22%22%20onclick%3D%22logout%28%29%22%3ESign%20Out%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%60%0A%20%20%20%20%7D%2C%0A%20%20%20%20getUserProfileIconHtml%3A%20function%20%28%29%20%7B%0A%20%20%20%20%20%20%20%20let%20fname%20%3D%20%27%27%2C%20pro_pic%20%3D%20%27%27%2C%20sub_account_rec%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%20%20if%20%28isUserLoggedIn%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20fname%20%3D%20extractDataFromArray%28user_info%2C%20%5B%27fname%27%5D%2C%20%27%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20pro_pic%20%3D%20extractDataFromArray%28user_info%2C%20%5B%27user_img%27%5D%2C%20%22/assets/images/profile_pic.svg%22%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20sub_account_rec%20%3D%20extractDataFromArray%28user_info%2C%20%5B%27sub_account_rec%27%5D%2C%20%5B%5D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%21empty%28sub_account_rec%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20fname%20%3D%20extractDataFromArray%28sub_account_rec%2C%20%5B%27name%27%5D%2C%20%27%27%29.split%28%27%20%27%29%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20return%20%60%3Cdiv%20class%3D%22navbar_notification%20easin%20mr-2%20d-none%20%22%3E%3Ci%20class%3D%22icon-notification%22%3E%3C/i%3E%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22%20easin%20dropdown%22%20%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cbutton%20class%3D%22dropdown-toggle%20navbar_profile_pic%22%20id%3D%22user_profile_dropdown%22%20data-toggle%3D%22dropdown%22%20aria-haspopup%3D%22false%22%20aria-expanded%3D%22false%22%20style%3D%22background-image%3Aurl%28%60+%20pro_pic%20+%20%60%29%22%20%3E%3C/button%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22dropdown-menu%20dropdown-menu-right%22%20aria-labelledby%3D%22user_profile_dropdown%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ch6%20class%3D%22dropdown-header%20border-bottom%22%3E%60+%20fname%20+%20%60%3C/h6%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22dropdown-item%20%60%20+%20%28%21empty%28sub_account_rec%29%20%3F%20%27d-none%27%20%3A%20%27%27%29%20+%20%60%22%20href%3D%22/user/settings%3Fs%3Dprofile%22%20id%3D%22subaccount_nav_dropdown_link%22%3EProfile%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20class%3D%22dropdown-item%20d-none%22%20href%3D%22/user/setting%22%3ESetting%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22dropdown-item%22%20href%3D%22%22%20onclick%3D%22logout%28%29%22%3ESign%20Out%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%60%0A%20%20%20%20%7D%0A%0A%7D%0A%0Afunction%20formUPIurl%28data%29%20%7B%0A%20%20%20%20let%20upi_url%20%3D%20%27upi%3A//pay%3F%27%0A%0A%20%20%20%20const%20vpa%20%3D%20extractDataFromArray%28data%2C%20%5B%27vpa%27%5D%2C%20%27%27%29%3B%0A%20%20%20%20if%20%28%21empty%28vpa%29%29%20%7B%0A%20%20%20%20%20%20%20%20upi_url%20+%3D%20%27pa%3D%27%20+%20vpa%20+%20%27%26%27%0A%20%20%20%20%7D%0A%0A%20%20%20%20const%20payee%20%3D%20extractDataFromArray%28data%2C%20%5B%27payee%27%5D%2C%20%27%27%29%3B%0A%20%20%20%20if%20%28%21empty%28payee%29%29%20%7B%0A%20%20%20%20%20%20%20%20upi_url%20+%3D%20%27pn%3D%27%20+%20payee%20+%20%27%26%27%0A%20%20%20%20%7D%0A%0A%20%20%20%20const%20amount%20%3D%20extractDataFromArray%28data%2C%20%5B%27amount%27%5D%2C%20%27%27%29%3B%0A%20%20%20%20if%20%28%21empty%28amount%29%29%20%7B%0A%20%20%20%20%20%20%20%20upi_url%20+%3D%20%27am%3D%27%20+%20amount%20+%20%27%26%27%0A%20%20%20%20%7D%0A%0A%20%20%20%20const%20currency%20%3D%20extractDataFromArray%28data%2C%20%5B%27currency%27%5D%2C%20%27%27%29%3B%0A%20%20%20%20if%20%28%21empty%28currency%29%29%20%7B%0A%20%20%20%20%20%20%20%20upi_url%20+%3D%20%27cu%3D%27%20+%20currency%20+%20%27%26%27%0A%20%20%20%20%7D%0A%0A%20%20%20%20const%20remark%20%3D%20extractDataFromArray%28data%2C%20%5B%27remark%27%5D%2C%20%27%27%29%3B%0A%20%20%20%20if%20%28%21empty%28remark%29%29%20%7B%0A%20%20%20%20%20%20%20%20upi_url%20+%3D%20%27tn%3D%27%20+%20remark%20+%20%27%26%27%0A%20%20%20%20%7D%0A%0A%20%20%20%20if%20%28upi_url.indexOf%28%27%26%27%29%20%3D%3D%20upi_url.length%20-%201%29%20%7B%0A%20%20%20%20%20%20%20%20upi_url%20%3D%20upi_url.substr%280%2C%20upi_url.length%20-%201%29%0A%20%20%20%20%7D%0A%20%20%20%20return%20upi_url%0A%0A%7D%0A%0Afunction%20isComponentBasedUI%28qr_type%20%3D%20%27%27%29%20%7B%0A%20%20%20%20qr_type%20%3D%20empty%28qr_type%29%20%3F%20page%20%3A%20qr_type%3B%0A%20%20%20%20return%20typeof%20__template_categories%20%21%3D%3D%20%22undefined%22%20%26%26%20extractDataFromArray%28__template_categories%2C%20%5Bqr_type%2C%20%27component_based%27%5D%2C%200%29%3B%0A%7D%0A'))</script>
+function serializeFormObject($form) {
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function (n, i) {
+        if (n['name'].indexOf('[]') >= 0) {
+            if (empty(indexed_array[n['name']])) {
+                indexed_array[n['name']] = new Array();
+            }
+            indexed_array[n['name']].push(n['value']);
+        } else {
+            indexed_array[n['name']] = n['value'];
+        }
+    });
+
+    return indexed_array;
+}
+
+function empty(mixed_var) {
+    // Checks if the argument variable is empty
+    // undefined, null, false, number 0, empty string,
+    // string "0", objects without properties and empty arrays
+    // are considered empty
+    var undef, key, i, len;
+    var emptyValues = [undef, undefined, null, false, 0, "", "0"];
+
+    for (i = 0, len = emptyValues.length; i < len; i++) {
+        if (mixed_var === emptyValues[i]) {
+            return true;
+        }
+    }
+
+    if (typeof mixed_var === "object") {
+        for (key in mixed_var) {
+            // TODO: should we check for own properties only?
+            //if (mixed_var.hasOwnProperty(key)) {
+            return false;
+            //}
+        }
+        return true;
+    }
+
+    return false;
+}
+
+
+$(document).ready(function () {
+    // if(readCookieData("qr-sb") == true){
+    //   $('#sidebar').removeClass('active');
+    //   $('.fixnav').removeClass('left_nav_hide');
+    // }else{
+    //   $('#sidebar').addClass('active');
+    //   $('.fixnav').addClass('left_nav_hide');
+    // }
+    // $('#sidebarCollapse').on('click', function () {
+    // 	$('#sidebar').toggleClass('active');
+    // 	$('.fixnav').toggleClass('left_nav_hide');
+    // 	if ($('#sidebar').hasClass('active')) {
+    // 		$("#sidebarCollapse").removeClass("icon-cross")
+    // 		$("#sidebarCollapse").addClass("icon-menu")
+    // 		setCookieData("sb", '1', 365)
+    // 		$(".qr_code_logo_click").attr("src", "/assets/images/qrcode-chimp.svg")
+    // 		$(".qr_code_logo_click").show()
+
+    // 	} else {
+    // 		$("#sidebarCollapse").removeClass("icon-menu")
+    // 		$("#sidebarCollapse").addClass("icon-cross")
+    // 		$(".qr_code_logo_click").hide()
+
+    // 		setCookieData("sb", '0', 365)
+    // 	}
+    // });
+
+    $('#sidebarCollapse , .mobile_nav_close_side').on('click', function () {
+        $('.fixnav').toggleClass('left_nav_show');
+    })
+
+    $(".qr_code_logo_click").on("click", function (e) {
+        location.href = 'https://www.qrcodechimp.com'
+    })
+
+    $(".account_limit_exhaust_form").on("submit", function (e) {
+        e.preventDefault()
+        const data = serializeFormObject($(this))
+        $.post("//" + __api_domain + '/user/services/openapi', data, function (response) {
+            if (!empty(response.data)) {
+                $('.thank_you').removeClass("d-none")
+                $('.account_limit_exhaust_form_wrapper').addClass("d-none")
+            }
+
+        })
+    })
+});
+
+function readCookieData(name) {
+    var data = readCookie(name);
+    //alert(data);
+    if (data != null) {
+        data = decodeURIComponent(data);
+        var dArr = data.split('&');
+        data = {};
+        for (var i = 0; i < dArr.length; ++i) {
+            //alert(dArr[i]);
+            var vals = dArr[i].split('=');
+            if (vals.length > 1) {
+                data[decodeURIComponent(vals[0])] = decodeURIComponent(vals[1]);
+            }
+            else if (vals.length == 1) {
+                data[decodeURIComponent(vals[0])] = '';
+            }
+        }
+    }
+    else {
+        data = {};
+    }
+    return data;
+}
+
+function setCookieData(name, data, days) {
+    createCookie(name, encodeURIComponent(data), days);
+}
+
+
+function set_cookie(name, value, exp_y, exp_m, exp_d, path, domain, secure) {
+    var cookie_string = name + "=" + escape(value);
+    if (exp_y) {
+        var expires = new Date(exp_y, exp_m, exp_d);
+        cookie_string += "; expires=" + expires.toGMTString();
+    }
+    if (path)
+        cookie_string += "; path=" + escape(path);
+    if (domain)
+        cookie_string += "; domain=" + escape(domain);
+    if (secure)
+        cookie_string += "; secure";
+    document.cookie = cookie_string;
+}
+
+function createCookie(name, value, days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+    }
+    else var expires = "";
+    let prefix = "qr-";
+    if (isDev()) {
+        prefix += 'DEV-';
+    } else if (isLocal()) {
+        prefix += 'LOCAL-';
+    } else if (isStag()) {
+        prefix += 'STAG-';
+    }
+    document.cookie = prefix + name + "=" + value + expires + "; path=/; domain=." + location.host;
+}
+
+function isProd() {
+    return !isLocal() && !isDev()
+}
+
+function isDev() {
+    const subdomain = location.host.split('.')[0]
+    return subdomain == 'dev' || subdomain == 'qd' || subdomain == 'dev-dashboard'
+}
+
+function isStag() {
+    const subdomain = location.host.split('.')[0]
+    return subdomain == 'sm' || subdomain == 's' || subdomain == 's-dashboard'
+}
+
+function isLocal() {
+    const subdomain = location.host.split('.')[0]
+    return subdomain == 'l' || subdomain == 'l-dashboard'
+}
+
+
+function readCookie(name) {
+    let prefix = "qr-";
+    if (name == 'qB') {
+        prefix = '';
+    }else if (isDev()) {
+        prefix += 'DEV-';
+    } else if (isLocal()) {
+        prefix += 'LOCAL-';
+    } else if (isStag()) {
+        prefix += 'STAG-';
+    }
+    var nameEQ = prefix + name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+
+    createCookie(name, '', 0);
+
+    let prefix = "qr-";
+    if (isDev()) {
+        prefix += 'DEV-';
+    } else if (isLocal()) {
+        prefix += 'LOCAL-';
+    } else if (isStag()) {
+        prefix += 'STAG-';
+    }
+    document.cookie = prefix + name + '=;max-age=0;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=.qrcodechimp.com';
+    document.cookie = prefix + name + '=;max-age=0;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=.www.qrcodechimp.com';
+    document.cookie = prefix + name + '=;max-age=0;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=.' + location.host;
+    document.cookie = prefix + name + '=;max-age=0;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+
+function array_move(arr, old_index, new_index) {
+    if (new_index >= arr.length) {
+        var k = new_index - arr.length + 1;
+        while (k--) {
+            arr.push(undefined);
+        }
+    }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    return arr; // for testing
+};
+
+function amILoggedIn() {
+    if ($(".user_profile_header").hasClass("loggedIn") || sharedUserLoggedIn()) {
+        return true;
+    }
+    return false;
+}
+
+function logInUser(userData) {
+    $(".user_profile_header").addClass("loggedIn")
+    if (readCookie('sid')) {
+        $("#subaccount_nav_dropdown_link").hide()
+    } else {
+        $("#subaccount_nav_dropdown_link").show()
+    }
+    let name = '';
+    if (!empty(readCookie('sid'))) {
+        name = extractDataFromArray(userData, ['sub_account_rec', 'name'], '');
+        name = name.split(' ')[0]
+    } else {
+        name = userData['fname'];
+    }
+    $(".navbar_profile_pic").css("background-image", 'url(' + userData['user_img'] + ')')
+    $(".dropdown-header").text(name)
+    $("#nav_dashboard_link").removeClass("d-none")
+    if (location.pathname == "/pricing") {
+        Array.from($(".mypricing_content")).forEach(ele => {
+            let button_text = 'CHOOSE PLAN';
+            if ($(ele).data('plan') == extractDataFromArray(user_info, ['plan_info', 'plan'], 'FR')) {
+                button_text = 'CURRENT PLAN';
+            }
+            $(ele).find('.mypricing_price_btn a').text(button_text)
+        })
+    }
+
+    // $("#headerSidebarCollapse").addClass("d-none")
+}
+
+function logOutUser() {
+    $(".user_profile_header").removeClass("loggedIn")
+    $("#nav_dashboard_link").addClass("d-none")
+    $('#sidebar').addClass('active');
+    $('.fixnav').addClass('left_nav_hide');
+}
+
+
+function showToast(type, msg) {
+    function showToastMsg(type, msg) {
+        var title = '';
+        var icon = '';
+        switch (type) {
+            case 'E':
+                title = 'Error'
+                icon = 'icon-cross'
+                break
+            default:
+                title = 'Success'
+                icon = 'icon-checkmark'
+                break
+        }
+        $(".toast-container").append('<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">\
+										<div class="toast-header">\
+											<i class="rounded mr-2 '+ icon + '" ></i>\
+											<strong class="mr-auto">'+ title + '</strong>\
+											<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">\
+												<span aria-hidden="true">&times;</span>\
+											</button>\
+										</div>\
+										<div class="toast-body">'+ msg + '</div>\
+									</div>')
+    }
+    if ($(".toast-container").length == 0) {
+        $("body").append('<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">\
+								<div class="toast-container" style="position: absolute; top: 0; right: 0;"></div>\
+							</div>')
+
+    }
+    showToastMsg(type, msg)
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+function getUrlParameterByName(name, return_val = null, url = undefined) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return return_val;
+    if (!results[2]) return return_val;
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+function removeUrlParameterByName(name) {
+    let url = window.location.search.substring(1);
+    let url_params = url.split("&")
+    let new_url = "";
+    let skip = 1;
+    url_params.forEach(param => {
+        let param_name = param.split("=")[0]
+        if (param_name != name) {
+            new_url += "&" + param
+        }else{
+            skip = 0;
+        }
+    })
+
+    if(skip){return}
+
+    try { window.history.replaceState(null, null, window.location.origin + location.pathname + (empty(new_url) ? '' :  (new_url.length == 0? '' : "?" + new_url.substring(1)))); }
+    catch (e) { console.log(e) }
+}
+
+function appendReferrerToCookie() {
+    if (!empty(document.referrer)) {
+        if (document.referrer.search(location.origin) != 0) {
+            let urls = decodeURIComponent(readCookie("broswer_ref")).split(",")
+            if (urls[urls.length - 1] != document.referrer) {
+                urls.push(document.referrer)
+                set_cookie("qr-broswer_ref", urls.join(","), (new Date()).getFullYear() + 20, 1, 1, '/')
+            }
+        }
+    }
+}
+
+appendReferrerToCookie()
+var PageHeader = {
+    startDate: null,
+    endDate: null,
+    onDateRageChange: null, //callback function set by the page
+    productList: {},//storing here so once fetched it can be used inside pages if needed
+    productListLoaded: false,
+    init: function () {
+        PageHeader.setupDatePicker();
+        PageHeader.setupProductPicker();
+        // PageHeader.setupBatchPicker();
+        PageHeader.setSwalDefaults();
+        PageHeader.setjQueryValidatorDefaults();
+        DateFilter.init();
+
+        $("#userList option:last").attr("selected", "selected");
+        $('.select-search').select2();
+    },
+    setupDatePicker: function () {
+        var clientSpecificTime = _getTimezoneSpecificTimeObj();
+        if ($('.daterange-ranges').length == 0) {
+            return;
+        }
+
+        $('.daterange-ranges').daterangepicker(
+            {
+                //startDate: moment().subtract(29, 'days'),
+                endDate: clientSpecificTime,
+                maxDate: clientSpecificTime,
+                ranges: {
+                    'Today': [clientSpecificTime, clientSpecificTime],
+                    'Yesterday': [clientSpecificTime.subtract(1, 'days'), clientSpecificTime.subtract(1, 'days')],
+                    'Last 7 Days': [clientSpecificTime.subtract(6, 'days'), clientSpecificTime],
+                    'Last 30 Days': [clientSpecificTime.subtract(29, 'days'), clientSpecificTime],
+                    'Last 90 Days': [clientSpecificTime.subtract(89, 'days'), clientSpecificTime],
+                    'This Month': [clientSpecificTime.startOf('month'), clientSpecificTime],
+                    'Last Month': [clientSpecificTime.subtract(1, 'month').startOf('month'), clientSpecificTime.subtract(1, 'month').endOf('month')]
+                },
+                opens: 'left',
+                applyClass: 'btn-small bg-slate-600 btn-block',
+                cancelClass: 'btn-small btn-default btn-block',
+                format: 'DD/MM/YYYY'
+            },
+            function (start, end, label) {
+                $('.daterange-ranges span').html(start.format('MMMM D') + ' - ' + end.format('MMMM D'));
+                PageHeader.startDate = start.format('YYYY-MM-DD');
+                PageHeader.endDate = end.format('YYYY-MM-DD');
+
+                //added by aasim storing user search preference in local storage
+                var strSearchDate = PageHeader.startDate + '|' + PageHeader.endDate;
+                createCookie('searchDate', strSearchDate, 365);
+                createCookie('searchDateLabel', label, 365);
+
+                if (PageHeader.onDateRageChange) {
+                    PageHeader.onDateRageChange();
+                }
+            }
+        );
+        var arrDate = getDateFromCookie();
+        if (!empty(arrDate)) {
+            PageHeader.startDate = moment(arrDate[0]).format('YYYY-MM-DD');
+            PageHeader.endDate = moment(arrDate[1]).format('YYYY-MM-DD');
+        } else {
+            PageHeader.startDate = clientSpecificTime.subtract(29, 'days').format('YYYY-MM-DD');
+            PageHeader.endDate = clientSpecificTime.format('YYYY-MM-DD');
+        }
+    },
+    setupProductPicker: function () {
+        if ($('#productList').length == 0) {
+            return;
+        }
+        PageHeader.getProductList();
+    },
+
+    getDisplayTitle: function (title, length, wrapLength) {
+        var l = title.length;
+        length = length ? length : 30;
+        wrapLength = wrapLength ? wrapLength : 45;
+        if (l > wrapLength) {
+            title = title.substring(0, length) + '...';
+        }
+        return title;
+    },
+
+    getProductList: function () {
+        showLoaderOnBlock(".content-wrapper");
+        $.get("//" + __api_domain + '/user/services/api?cmd=getProductList',
+            function (response) {
+                $(".content-wrapper").unblock();
+                var json = parseResponse(response);
+                if (json) {
+
+                    var $productList = $('#productList, .productList');
+                    $productList.empty();
+                    PageHeader.productList = {};
+                    $productList.append('<option value="All">All Products</option>');
+                    for (var counter = 0; counter < json.data.length; ++counter) {
+                        var element = json.data[counter];
+                        $productList.append('<option value="' + element._id + '" title="' + element.pr_description.value.pr_title + '">' + PageHeader.getDisplayTitle(element.pr_description.value.pr_title) + '  (' + element.sku_id + ') </option>');
+                        PageHeader.productList[element._id] = element;
+                    }
+                    $productList.select2();
+                    PageHeader.productListLoaded = true;
+                }
+            });
+    },
+
+    // setupBatchPicker: function() {
+    //     if($('#batchList').length == 0){
+    //         return;
+    //     }
+    //     PageHeader.getBatchList();
+    // },
+
+    // getBatchList: function()
+    // {
+    //     showLoaderOnBlock(".content-wrapper");
+    //     $.ajax({
+    //         data: {'cmd' : 'getBatchList'},
+    //         type: "POST",
+    //         url: "//"+__api_domain+"/user/services/api",
+    //         success: function(response) {
+    //             $(".content-wrapper").unblock();
+    //             var json = parseResponse(response);
+    //             if(!json)
+    //             {  
+    //                 return
+    //             }
+    //             var $batchList = $('#batchList');
+    //             $batchList.empty();
+    //             // PageHeader.batchList = {};
+    //             $batchList.append('<option value="All">All Batch</option>');
+    //             for(var counter=0; counter<json.data.length; ++counter)
+    //             {
+    //                 var element = json.data[counter];   
+    //                 $batchList.append(`<option value="${element._id}" >${element.client_batch_id}</option>`);
+    //                 // PageHeader.productList[element._id] = element;
+    //             }
+    //             $batchList.select2();
+    //             // PageHeader.productListLoaded = true;
+    //         },
+    //         error: function(XMLHttpRequest, textStatus, errorThrown) { 
+    //             $(".content-wrapper").unblock();
+    //             showAlertMessage('E',errorThrown);
+    //         }
+    //     })
+    // },
+
+    setSwalDefaults: function () {
+        swal.setDefaults({
+            buttonsStyling: false,
+            confirmButtonClass: 'btn btn-primary',
+            cancelButtonClass: 'btn btn-light'
+        });
+    },
+    setjQueryValidatorDefaults: function () {
+        jQuery.validator.setDefaults({
+            ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
+            errorClass: 'validation-invalid-label',
+            successClass: 'validation-valid-label',
+            validClass: 'validation-valid-label',
+            highlight: function (element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function (element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            success: function (label) {
+                //label.removeClass('validation-invalid-label');
+                label.remove();
+                //label.addClass('validation-valid-label').text('Success.'); // remove to hide Success message
+            },
+
+            // Different components require proper error label placement
+            errorPlacement: function (error, element) {
+
+                // Unstyled checkboxes, radios
+                if (element.parents().hasClass('form-check')) {
+                    error.appendTo(element.parents('.form-check').parent());
+                }
+
+                // Input with icons and Select2
+                else if (element.parents().hasClass('form-group-feedback') || element.hasClass('select2-hidden-accessible')) {
+                    error.appendTo(element.parent());
+                }
+
+                // Input group, styled file input
+                else if (element.parent().is('.uniform-uploader, .uniform-select') || element.parents().hasClass('input-group')) {
+                    error.appendTo(element.parent().parent());
+                }
+
+                else if (element.hasClass('select2') && element.next('.select2-container').length) {
+                    error.insertAfter(element.next('.select2-container'));
+                }
+                // Other elements
+                else {
+                    error.insertAfter(element);
+                }
+            },
+            rules: {
+                password: {
+                    minlength: 5
+                },
+                repeat_password: {
+                    equalTo: '#password'
+                },
+                email: {
+                    email: true
+                },
+                repeat_email: {
+                    equalTo: '#email'
+                },
+                minimum_characters: {
+                    minlength: 10
+                },
+                maximum_characters: {
+                    maxlength: 10
+                },
+                minimum_number: {
+                    min: 10
+                },
+                maximum_number: {
+                    max: 10
+                },
+                number_range: {
+                    range: [10, 20]
+                },
+                url: {
+                    url: true
+                },
+                date: {
+                    date: true
+                },
+                date_iso: {
+                    dateISO: true
+                },
+                numbers: {
+                    number: true
+                },
+                digits: {
+                    digits: true
+                },
+                creditcard: {
+                    creditcard: true
+                },
+                basic_checkbox: {
+                    minlength: 2
+                },
+                styled_checkbox: {
+                    minlength: 2
+                },
+                switchery_group: {
+                    minlength: 2
+                },
+                switch_group: {
+                    minlength: 2
+                }
+            },
+            messages: {
+                custom: {
+                    required: 'This is a custom error message'
+                },
+                basic_checkbox: {
+                    minlength: 'Please select at least {0} checkboxes'
+                },
+                styled_checkbox: {
+                    minlength: 'Please select at least {0} checkboxes'
+                },
+                switchery_group: {
+                    minlength: 'Please select at least {0} switches'
+                },
+                switch_group: {
+                    minlength: 'Please select at least {0} switches'
+                },
+                agree: 'Please accept our policy'
+            }
+        });
+    },
+    addButtonToDataTableDiv: function (filterCategory) {
+        // $('.filterDiv').html(`<h3 class="heading-btn m-2"><span class="badge badge-pill badge-light" ><i class="icon-cancel-circle2 text-muted font20 `+filterCategory+`-close" style="cursor:pointer;" onclick="DateFilter.removeFilter();"></i>&nbsp;&nbsp;<span id="dateText" style="cursor:pointer;" data-toggle="modal" data-target="#dateFilterModal" onclick="PageHeader.showDateFilter();"></span></span></h3>`);        
+
+        DateFilter.init('dataTable');
+        //   DateFilter.removeFilter();
+        PageHeader.showDateFilter();
+    },
+    showDateFilter: function () {
+        // $('.dateRangeRadio').uniform({
+        //     wrapperClass: 'border-primary-600 text-primary-800'
+        // });
+
+        $('#dateFilterModal').modal("show");
+    }
+}
+
+var DateFilter = {
+
+    calendar_startDate: null,
+    calendar_endDate: null,
+    minDate: -999,
+    init: function (filterCategory) {
+        if ($('#daterange_start_date, #daterange_end_date, #daterange_start_date_startToToday').length == 0) {
+            return;
+        }
+        this.calendar_startDate = $('#daterange_start_date').pickadate({
+            min: DateFilter.minDate,
+            max: true,
+            formatSubmit: 'yyyy-mm-dd',
+            selectYears: true,
+            selectMonths: true,
+            today: false,
+            clear: false,
+            close: false
+        });
+
+        this.calendar_endDate = $('#daterange_end_date').pickadate({
+            min: DateFilter.minDate,
+            max: true,
+            formatSubmit: 'yyyy-mm-dd',
+            selectYears: true,
+            selectMonths: true,
+            today: false,
+            clear: false,
+            close: false
+        });
+
+        this.calendar_startToToday = $('#daterange_start_date_startToToday').pickadate({
+            min: DateFilter.minDate,
+            max: true,
+            formatSubmit: 'yyyy-mm-dd',
+            selectYears: true,
+            selectMonths: true,
+            today: false,
+            clear: false,
+            close: false
+        });
+        if (filterCategory == "dataTable") {
+            if (!PageHeader.startDate && !PageHeader.endDate) {
+                $('.dateRangeRadio[value = 30d]').prop('checked', false);
+                $('.heading-btn span[id="dateText"]').html('');
+                // $('.heading-btn').addClass("d-none");
+            }
+            else {
+                $('.filterDiv').html(`<h3 class="heading-btn m-2"><span class="badge badge-pill badge-light" ><i class="icon-cancel-circle2 text-muted font20 dateRangeFilter-close" style="cursor:pointer;" onclick="DateFilter.removeFilter();"></i>&nbsp;&nbsp;<span id="dateText" style="cursor:pointer;" data-toggle="modal" data-target="#dateFilterModal" onclick="PageHeader.showDateFilter();"></span></span></h3>`);
+                $('.heading-btn span[id="dateText"]').html(moment(PageHeader.startDate).format('MMMM D') + ' - ' + moment(PageHeader.endDate).format('MMMM D'));
+            }
+        }
+        else {
+            var start = _getTimezoneSpecificTimeObj().subtract(29, 'days');
+            var end = _getTimezoneSpecificTimeObj();
+            PageHeader.startDate = start.format('YYYY-MM-DD');
+            PageHeader.endDate = end.format('YYYY-MM-DD');
+            $('.heading-btn span[id="dateText"]').html(start.format('MMMM D') + ' - ' + end.format('MMMM D'));
+        }
+        // $('#customDateDiv').hide();
+        $('#daterange_startToToday_div').hide();
+        $('#daterange_end_date_div').hide();
+        $('#daterange_start_date_div').hide();
+
+        $('input[name="dateRangeOption"]').on('click', function (e) {
+            DateFilter.hideShowCustomDate(e);
+        });
+
+        var moduleName = window.location.pathname.split("/")[1];
+        var allowedModules = ['dashboard', 'im', 'tt', 'counterfeit'];
+        /**
+         * Commenting this if condition
+         * Jira - 1822 : Client ==> Applied Date should be saved for all pages where calender is on top instead of filter (above table.)
+         */
+
+        /**
+         * Adding true in or condition as this may change in future
+         */
+        if (allowedModules.includes(moduleName) || true) {
+            var arrDate = getDateFromCookie();
+            if (!empty(arrDate)) {
+                PageHeader.startDate = moment(arrDate[0]).format('YYYY-MM-DD');
+                PageHeader.endDate = moment(arrDate[1]).format('YYYY-MM-DD');
+                if (!empty(arrDate[2])) {
+                    $('.dateRangeRadio[value="' + arrDate[2] + '"]').prop('checked', true);
+                    if (arrDate[2] == 'c') {
+                        var pickerStartDate = this.calendar_startDate.pickadate('picker');
+                        var pickerEndDate = this.calendar_endDate.pickadate('picker');
+
+                        pickerStartDate.set('select', new Date(arrDate[0]));
+                        pickerEndDate.set('select', new Date(arrDate[1]));
+                        $('#daterange_start_date_div').show();
+                        $('#daterange_end_date_div').show();
+                    }
+                    else if (arrDate[2] == 'startToToday') {
+                        var pickerStartToToday = this.calendar_startToToday.pickadate('picker');
+
+                        pickerStartToToday.set('select', new Date(arrDate[0]));
+                        $('#daterange_startToToday_div').show();
+                    }
+                }
+            }
+        }
+    },
+
+    setDateRange: function () {
+        var formObject = $('#dateRangeForm');
+        var formData = serializeFormObject(formObject);
+        var dateRangeOption = formData.dateRangeOption;
+        var dateToDisplay = '';
+        var start, end;
+        if (!empty(dateRangeOption)) {
+            switch (dateRangeOption) {
+
+                case 'today':
+                    dateToDisplay = _getTimezoneSpecificTimeObj().format('MMMM D') + ' - ' + _getTimezoneSpecificTimeObj().format('MMMM D');
+                    PageHeader.startDate = _getTimezoneSpecificTimeObj().format('YYYY-MM-DD');
+                    PageHeader.endDate = _getTimezoneSpecificTimeObj().format('YYYY-MM-DD');
+
+                    break;
+
+                case 'yesterday':
+                    dateToDisplay = _getTimezoneSpecificTimeObj().subtract(1, 'days').format('MMMM D') + ' - ' + _getTimezoneSpecificTimeObj().subtract(1, 'days').format('MMMM D');
+                    PageHeader.startDate = _getTimezoneSpecificTimeObj().subtract(1, 'days').format('YYYY-MM-DD');
+                    PageHeader.endDate = _getTimezoneSpecificTimeObj().subtract(1, 'days').format('YYYY-MM-DD');
+
+                    break;
+
+                case '7d':
+                    dateToDisplay = _getTimezoneSpecificTimeObj().subtract(6, 'days').format('MMMM D') + ' - ' + _getTimezoneSpecificTimeObj().format('MMMM D');
+                    PageHeader.startDate = _getTimezoneSpecificTimeObj().subtract(6, 'days').format('YYYY-MM-DD');
+                    PageHeader.endDate = _getTimezoneSpecificTimeObj().format('YYYY-MM-DD');
+                    break;
+
+                case '30d':
+                    dateToDisplay = _getTimezoneSpecificTimeObj().subtract(29, 'days').format('MMMM D') + ' - ' + _getTimezoneSpecificTimeObj().format('MMMM D');
+                    PageHeader.startDate = _getTimezoneSpecificTimeObj().subtract(29, 'days').format('YYYY-MM-DD');
+                    PageHeader.endDate = _getTimezoneSpecificTimeObj().format('YYYY-MM-DD');
+                    break;
+
+                case '90d':
+                    dateToDisplay = _getTimezoneSpecificTimeObj().subtract(89, 'days').format('MMMM D') + ' - ' + _getTimezoneSpecificTimeObj().format('MMMM D');
+                    PageHeader.startDate = _getTimezoneSpecificTimeObj().subtract(89, 'days').format('YYYY-MM-DD');
+                    PageHeader.endDate = _getTimezoneSpecificTimeObj().format('YYYY-MM-DD');
+                    break;
+
+                case 'currentMonth':
+                    dateToDisplay = _getTimezoneSpecificTimeObj().startOf('month').format('MMMM D') + ' - ' + _getTimezoneSpecificTimeObj().format('MMMM D');
+                    PageHeader.startDate = _getTimezoneSpecificTimeObj().startOf('month').format('YYYY-MM-DD');
+                    PageHeader.endDate = _getTimezoneSpecificTimeObj().format('YYYY-MM-DD');
+                    break;
+
+                case 'lastMonth':
+                    dateToDisplay = _getTimezoneSpecificTimeObj().subtract(1, 'month').startOf('month').format('MMMM D') + ' - ' + _getTimezoneSpecificTimeObj().subtract(1, 'month').endOf('month').format('MMMM D');
+                    PageHeader.startDate = _getTimezoneSpecificTimeObj().subtract(1, 'month').startOf('month').format('YYYY-MM-DD');
+                    PageHeader.endDate = _getTimezoneSpecificTimeObj().subtract(1, 'month').endOf('month').format('YYYY-MM-DD');
+                    break;
+
+                case 'c':
+                    if (empty(formData.start_date_submit) || empty(formData.end_date_submit)) {
+                        showAlertMessage('E', 'Please select start and end date.');
+                        return;
+                    }
+
+                    if (moment(formData.end_date_submit).diff(moment(formData.start_date_submit), 'days') < 0) {
+                        showAlertMessage('E', 'Start date should be less than or equal to the end date.');
+                        return;
+                    }
+                    dateToDisplay = moment(formData.start_date_submit).format('MMMM D') + ' - ' + moment(formData.end_date_submit).format('MMMM D');
+                    PageHeader.startDate = formData.start_date_submit;
+                    PageHeader.endDate = formData.end_date_submit;
+                    break;
+
+                case 'startToToday':
+                    if (empty(formData.startToToday_date_submit)) {
+                        showAlertMessage('E', 'Please select start date.');
+                        return;
+                    }
+                    dateToDisplay = moment(formData.startToToday_date_submit).format('MMMM D') + ' - ' + _getTimezoneSpecificTimeObj().format('MMMM D');
+                    PageHeader.startDate = formData.startToToday_date_submit;
+                    PageHeader.endDate = _getTimezoneSpecificTimeObj().format('YYYY-MM-DD');
+                    break;
+            }
+            $('.filterDiv').html(`<h3 class="heading-btn m-2"><span class="badge badge-pill badge-light" ><i class="icon-cancel-circle2 text-muted font20 dateRangeFilter-close" style="cursor:pointer;" onclick="DateFilter.removeFilter();"></i>&nbsp;&nbsp;<span id="dateText" style="cursor:pointer;" data-toggle="modal" data-target="#dateFilterModal" onclick="PageHeader.showDateFilter();"></span></span></h3>`);
+            $('.heading-btn').removeClass("d-none");
+            $('.heading-btn span[id="dateText"]').html(dateToDisplay);
+
+            var moduleName = window.location.pathname.split("/")[1];
+            /**
+             * Jira - 1822 : Applied Date should be saved for all pages where calender is on top instead of filter (above table.)
+             */
+            var allowedModules = ['dashboard', 'im', 'tt', 'counterfeit'];
+
+            /**
+             * Adding true in or condition as this may change in future
+             */
+            if (allowedModules.includes(moduleName) || true) {
+                var strSearchDate = PageHeader.startDate + '|' + PageHeader.endDate;
+                createCookie('searchDate', strSearchDate, 365);
+                createCookie('searchDateLabel', dateRangeOption, 365);
+            }
+            if (PageHeader.onDateRageChange) {
+                PageHeader.onDateRageChange();
+            }
+            $('#dateFilterModal').modal("hide");
+        }
+    },
+    hideShowCustomDate: function (e) {
+        var value = e.target.value;
+        if (value == 'c') {
+            $('#daterange_startToToday_div').hide();
+            $('#daterange_end_date_div').show();
+            $('#daterange_start_date_div').show();
+            // $('#customDateDiv').show();
+            $('#daterange_end_date').val('');
+        }
+        else if (value == "startToToday") {
+            // $('#customDateDiv').show();
+            $('#daterange_startToToday_div').show();
+            $('#daterange_start_date_div').hide();
+            var pickerEndDate = DateFilter.calendar_endDate.pickadate('picker');
+            pickerEndDate.set('select', new Date());
+            $('#daterange_end_date_div').hide();
+        }
+        else {
+            $('#daterange_startToToday_div').hide();
+            $('#daterange_end_date_div').hide();
+            $('#daterange_start_date_div').hide();
+        }
+    },
+
+    removeFilter: function () {
+        $(event.target).parent().remove();
+        $('.filterDiv').empty();
+
+        /**
+         * Commenting below code
+         *  Jira - 1822 : defult 30 days filter should not be shown in datatable
+         */
+        // $('.dateRangeRadio[value = 30d]').prop('checked', true);
+        // PageHeader.startDate = moment().subtract(29, 'days').format('YYYY-MM-DD');
+        // PageHeader.endDate = moment().format('YYYY-MM-DD');
+
+        $('.dateRangeRadio').prop('checked', false);
+        PageHeader.startDate = null;
+        PageHeader.endDate = null;
+
+        if (PageHeader.onDateRageChange) {
+            PageHeader.onDateRageChange();
+        }
+    }
+
+}
+
+function initInvoicePopups() {
+    let __download_invoice_call = false;
+    let current_user = user_info;
+    if (page == 'users') {
+        current_user = __current_user_info;
+    }
+    function showEditBillingInfoPopup() {
+        let country_dropdown_html = '';
+        const user_country = extractDataFromArray(current_user, ['billing_info', 'country'], extractDataFromArray(current_user, ['ip', 'country']))
+        const user_state = extractDataFromArray(current_user, ['billing_info', 'state'], extractDataFromArray(current_user, ['ip', 'state']))
+        Object.keys(countryCodeToName).forEach(code => {
+            country_dropdown_html += '<option value="' + code + '" ' + (user_country == code ? 'selected' : '') + '>' + countryCodeToName[code] + '</option>'
+        })
+        let state_dropdown_html = '';
+        IndianStateNames.forEach(state => {
+            state_dropdown_html += '<option value="' + state + '" ' + (user_state == state ? 'selected' : '') + '>' + state + '</option>'
+        })
+        $(".stripe_billing_address").html()
+        BillingInfo.listeners()
+        Swal.fire({
+            width: 600,
+            title: 'Billing Details',
+            html: `
+            <div class="text-left">
+                <div class="font-16 font-weight-semibold mb-2">Business Name</div>
+                <div class="font-14">
+                    <input type="text" class="form-control" name="name" value="`+ extractDataFromArray(current_user, ['billing_info', 'name'], current_user['fname'] + (empty(current_user['lname']) ? '' : ' ' + current_user['lname'])) + `" errormsg="Name is incomplete.">
+                </div>
+            </div>
+            `+ BillingInfo.getBillingInfosForm(),
+            showCancelButton: true,
+            reverseButtons: true,
+            confirmButtonText: 'Save',
+            willOpen: () => {
+                BillingInfo.listeners()
+                BillingInfo.inputValidations()
+                $("#swal2-content input[name=name]").on("input", function (e) {
+                    if (e.target.value == '') {
+                        showInputInvalid("#swal2-content input[name=name]")
+                    } else {
+                        hideInputInvalid("#swal2-content input[name=name]")
+                    }
+                })
+            },
+            preConfirm: () => {
+                let billing_info = BillingInfo.getFormData();
+                if (!billing_info) {
+                    return false
+                }
+                billing_info.name = $("#swal2-content input[name=name]").val();
+                if (empty(billing_info.name)) {
+                    showInputInvalid("#swal2-content input[name=name]")
+                    return false
+                }
+                return billing_info
+            }
+        }).then(result => {
+            if (result.isConfirmed) {
+                $.post("//" + __api_domain + "/user/services/api", { cmd: 'updateProfile', formData: JSON.stringify({ billing_info: result.value }), user_id: getUrlParameterByName('user_id') }, function (response) {
+                    if (!empty(response.data)) {
+                        if (page == 'users') {
+                            __current_user_info['billing_info'] = result.value
+                        } else {
+                            user_info['billing_info'] = result.value
+                        }
+                        $("#billing_info_name").text(result.value.name)
+
+                        let address = result.value.line1 + '<br>'
+                        if (!empty(result.value.city)) {
+                            address += result.value.city + '<br>'
+                        }
+                        if (!empty(result.value.state)) {
+                            address += result.value.state + '<br>'
+                        }
+                        address += 'Zip - ' + result.value.postal_code + '<br>' + countryCodeToName[result.value.country] + '<br>'
+
+                        $("#billing_info_address").html(address)
+                        if (result.value.country == 'IN' && !empty(result.value.gstpin)) {
+                            $("#billing_info_gstpin").html("<strong>GST PIN: </strong>" + result.value.gstpin)
+                            $("#billing_info_gstpin").show()
+                        } else {
+                            $("#billing_info_gstpin").hide()
+                        }
+                        SwalPopup.showSingleButtonPopup({
+                            title: '',
+                            icon: 'success',
+                            text: "Saved",
+                            confirmButtonText: 'Ok',
+                        }, () => {
+                            if (!empty(__download_invoice_call)) {
+                                const inv_id = __download_invoice_call
+                                __download_invoice_call = false
+                                location.href = "//" + __api_domain + "/user/services/api?cmd=getInvoicePdf&inv_id=" + inv_id
+                            }
+
+                        })
+                    }
+                })
+            }
+        })
+
+        $("select[name=country]").select2()
+        $("select[name=state]").select2()
+    }
+
+    $("#btn_edit_biller_info").on("click", function (e) {
+        showEditBillingInfoPopup()
+    })
+    $(document).on("click", '.btn_download_invoice', function (e) {
+        __download_invoice_call = null
+        if (empty(extractDataFromArray(current_user, ['billing_info', 'country']))) {
+            __download_invoice_call = $(this).data('inv_id');
+            showEditBillingInfoPopup()
+        } else {
+            location.href = "//" + __api_domain + "/user/services/api?cmd=getInvoicePdf&inv_id=" + $(this).data('inv_id')
+        }
+    })
+
+    $(document).on("change", 'select[name=country]', function (e) {
+        if (e.target.value == 'IN') {
+            $("#gstpin_input").show()
+            $("#state_input").show()
+        } else {
+            $("#gstpin_input").hide()
+            $("#state_input").hide()
+        }
+    })
+
+
+}
+
+
+function toggleWatermark() {
+    if (page != 'users') {
+        if (extractDataFromArray(user_info, ['plan_info', 'plan'], 'FR') == 'FR') {
+            Swal.fire({
+                title: 'Plan Upgrade Required',
+                html: '<div class="py-4">You may remove the watermark only for paid plans. Please go to the <a href="/user/pricing">Pricing page</a> for more details.</div>',
+                showCancelButton: true,
+                confirmButtonText: "Upgrade Now",
+                reverseButtons: true
+            }).then(result => {
+                if (result.isConfirmed) {
+                    location.href = "/pricing"
+                }
+            })
+            return;
+        }
+    }
+    Swal.fire({
+        title: 'Remove Watermark',
+        text: 'Do you want to change?',
+        showCancelButton: true,
+        reverseButtons: true,
+        confirmButtonText: "Confirm"
+    }).then(result => {
+        if (result.isConfirmed) {
+            let data = {
+                cmd: 'toggleWatermark',
+                user_id: getUrlParameterByName('user_id')
+            }
+            if (page == 'users') {
+                data.value = $("#show_watermark").prop("checked")
+            } else {
+                data.value = $("#qr_watermark").text() == 'Yes'
+            }
+            $.post("//" + __api_domain + '/user/services/api', data, function (response) {
+                if ($("#qr_watermark").text() == 'Yes') {
+                    $("#qr_watermark").text('No')
+                } else {
+                    $("#qr_watermark").text('Yes')
+                }
+
+                SwalPopup.showSingleButtonPopup({
+                    icon: 'success',
+                    text: 'Updated successfully!'
+                })
+            })
+        } else {
+            if (page == 'users') {
+                $("#show_watermark").prop("checked", !$("#show_watermark").prop("checked"))
+            }
+        }
+    })
+}
+
+function changeLocale() {
+    Swal.fire({
+        title: 'Change Locale',
+        text: 'Do you want to change?',
+        showCancelButton: true,
+        reverseButtons: true,
+        confirmButtonText: "Confirm"
+    }).then(result => {
+        if (result.isConfirmed) {
+            let locale = $("#locale_select").val();
+            let data = {
+                cmd: 'updateProfile',
+                user_id: getUrlParameterByName('user_id'),
+                formData: JSON.stringify({ locale, redirect_domain: locale + ".qrcodechimp.com" })
+            }
+
+            $.post("//" + __api_domain + '/user/services/api', data, function (response) {
+                SwalPopup.showSingleButtonPopup({
+                    icon: 'success',
+                    text: 'Updated successfully!'
+                }, ()=>{
+                    location.href = location.href.replace(location.host, locale + ".qrcodechimp.com")
+                })
+            })
+        }
+    })
+}
+
+function toggleSvgDownload() {
+
+    Swal.fire({
+        title: 'SVG Download Option',
+        text: 'Do you want to toggle the option?',
+        showCancelButton: true,
+        reverseButtons: true,
+        confirmButtonText: "Confirm"
+    }).then(result => {
+        if (result.isConfirmed) {
+            let data = {
+                cmd: 'toggleSvgDownload',
+                user_id: getUrlParameterByName('user_id')
+            }
+            data.value = $("#svg_download").prop("checked")
+
+            $.post("//" + __api_domain + '/user/services/api', data, function (response) {
+
+
+                SwalPopup.showSingleButtonPopup({
+                    icon: 'success',
+                    text: 'Updated successfully!'
+                })
+            })
+        } else {
+            $("#svg_download").prop("checked", !$("#svg_download").prop("checked"))
+        }
+    })
+}
+
+// const countryCodeToName = {
+//     "BD": "Bangladesh",
+//     "BE": "Belgium",
+//     "BF": "Burkina Faso",
+//     "BG": "Bulgaria",
+//     "BA": "Bosnia and Herzegovina",
+//     "BN": "Brunei",
+//     "BO": "Bolivia",
+//     "JP": "Japan",
+//     "BI": "Burundi",
+//     "BJ": "Benin",
+//     "BT": "Bhutan",
+//     "JM": "Jamaica",
+//     "BW": "Botswana",
+//     "BR": "Brazil",
+//     "BS": "The Bahamas",
+//     "BY": "Belarus",
+//     "BZ": "Belize",
+//     "RU": "Russia",
+//     "RW": "Rwanda",
+//     "RS": "Republic of Serbia",
+//     "LT": "Lithuania",
+//     "LU": "Luxembourg",
+//     "LR": "Liberia",
+//     "RO": "Romania",
+//     "GW": "Guinea Bissau",
+//     "GT": "Guatemala",
+//     "GR": "Greece",
+//     "GQ": "Equatorial Guinea",
+//     "GY": "Guyana",
+//     "GE": "Georgia",
+//     "GB": "United Kingdom",
+//     "GA": "Gabon",
+//     "GN": "Guinea",
+//     "GM": "Gambia",
+//     "GL": "Greenland",
+//     "KW": "Kuwait",
+//     "GH": "Ghana",
+//     "OM": "Oman",
+//     "_3": "Somaliland",
+//     "EH": "Western Sahara",
+//     "XK": "Kosovo",
+//     "_0": "Northern Cyprus",
+//     "JO": "Jordan",
+//     "HR": "Croatia",
+//     "HT": "Haiti",
+//     "HU": "Hungary",
+//     "HN": "Honduras",
+//     "PR": "Puerto Rico",
+//     "PS": "West Bank",
+//     "PT": "Portugal",
+//     "PY": "Paraguay",
+//     "PA": "Panama",
+//     "PG": "Papua New Guinea",
+//     "PE": "Peru",
+//     "PK": "Pakistan",
+//     "PH": "Philippines",
+//     "PL": "Poland",
+//     "ZM": "Zambia",
+//     "EE": "Estonia",
+//     "EG": "Egypt",
+//     "ZA": "South Africa",
+//     "EC": "Ecuador",
+//     "AL": "Albania",
+//     "AO": "Angola",
+//     "KZ": "Kazakhstan",
+//     "ET": "Ethiopia",
+//     "ZW": "Zimbabwe",
+//     "ES": "Spain",
+//     "ER": "Eritrea",
+//     "ME": "Montenegro",
+//     "MD": "Moldova",
+//     "MG": "Madagascar",
+//     "MA": "Morocco",
+//     "UZ": "Uzbekistan",
+//     "MM": "Myanmar",
+//     "ML": "Mali",
+//     "MN": "Mongolia",
+//     "MK": "Macedonia",
+//     "MW": "Malawi",
+//     "MR": "Mauritania",
+//     "UG": "Uganda",
+//     "MY": "Malaysia",
+//     "MX": "Mexico",
+//     "VU": "Vanuatu",
+//     "FR": "France",
+//     "FI": "Finland",
+//     "FJ": "Fiji",
+//     "FK": "Falkland Islands",
+//     "NI": "Nicaragua",
+//     "NL": "Netherlands",
+//     "NO": "Norway",
+//     "NA": "Namibia",
+//     "NC": "New Caledonia",
+//     "NE": "Niger",
+//     "NG": "Nigeria",
+//     "NZ": "New Zealand",
+//     "NP": "Nepal",
+//     "CI": "Ivory Coast",
+//     "CH": "Switzerland",
+//     "CO": "Colombia",
+//     "CN": "China",
+//     "CM": "Cameroon",
+//     "CL": "Chile",
+//     "CA": "Canada",
+//     "CG": "Republic of the Congo",
+//     "CF": "Central African Republic",
+//     "CD": "Democratic Republic of the Congo",
+//     "CZ": "Czech Republic",
+//     "CY": "Cyprus",
+//     "CR": "Costa Rica",
+//     "CU": "Cuba",
+//     "SZ": "Swaziland",
+//     "SY": "Syria",
+//     "KG": "Kyrgyzstan",
+//     "KE": "Kenya",
+//     "SS": "South Sudan",
+//     "SR": "Suriname",
+//     "KH": "Cambodia",
+//     "SV": "El Salvador",
+//     "SK": "Slovakia",
+//     "KR": "South Korea",
+//     "SI": "Slovenia",
+//     "KP": "North Korea",
+//     "SO": "Somalia",
+//     "SN": "Senegal",
+//     "SL": "Sierra Leone",
+//     "SB": "Solomon Islands",
+//     "SA": "Saudi Arabia",
+//     "SE": "Sweden",
+//     "SD": "Sudan",
+//     "DO": "Dominican Republic",
+//     "DJ": "Djibouti",
+//     "DK": "Denmark",
+//     "DE": "Germany",
+//     "YE": "Yemen",
+//     "AT": "Austria",
+//     "DZ": "Algeria",
+//     "US": "United States of America",
+//     "LV": "Latvia",
+//     "UY": "Uruguay",
+//     "LB": "Lebanon",
+//     "LA": "Laos",
+//     "TW": "Taiwan",
+//     "TT": "Trinidad and Tobago",
+//     "TR": "Turkey",
+//     "LK": "Sri Lanka",
+//     "TN": "Tunisia",
+//     "TL": "East Timor",
+//     "TM": "Turkmenistan",
+//     "TJ": "Tajikistan",
+//     "LS": "Lesotho",
+//     "TH": "Thailand",
+//     "TF": "French Southern and Antarctic Lands",
+//     "TG": "Togo",
+//     "TD": "Chad",
+//     "LY": "Libya",
+//     "AE": "United Arab Emirates",
+//     "VE": "Venezuela",
+//     "AF": "Afghanistan",
+//     "IQ": "Iraq",
+//     "IS": "Iceland",
+//     "IR": "Iran",
+//     "AM": "Armenia",
+//     "IT": "Italy",
+//     "VN": "Vietnam",
+//     "AR": "Argentina",
+//     "AU": "Australia",
+//     "IL": "Israel",
+//     "IN": "India",
+//     "TZ": "Tanzania",
+//     "AZ": "Azerbaijan",
+//     "IE": "Ireland",
+//     "ID": "Indonesia",
+//     "UA": "Ukraine",
+//     "QA": "Qatar",
+//     "MZ": "Mozambique"
+// }
+
+const countryCodeToName = {
+    "BB" : "Barbados",
+    "BD" : "Bangladesh",
+    "BE" : "Belgium",
+    "BF" : "Burkina Faso",
+    "BG" : "Bulgaria",
+    "BA" : "Bosnia and Herzegovina",
+    "BN" : "Brunei",
+    "BO" : "Bolivia",
+    "JP" : "Japan",
+    "BI" : "Burundi",
+    "BJ" : "Benin",
+    "BT" : "Bhutan",
+    "JM" : "Jamaica",
+    "BW" : "Botswana",
+    "BR" : "Brazil",
+    "BS" : "The Bahamas",
+    "BY" : "Belarus",
+    "BZ" : "Belize",
+    "RU" : "Russia",
+    "RW" : "Rwanda",
+    "RS" : "Republic of Serbia",
+    "LT" : "Lithuania",
+    "LU" : "Luxembourg",
+    "LR" : "Liberia",
+    "RO" : "Romania",
+    "GW" : "Guinea Bissau",
+    "GT" : "Guatemala",
+    "GR" : "Greece",
+    "GQ" : "Equatorial Guinea",
+    "GY" : "Guyana",
+    "GE" : "Georgia",
+    "GB" : "United Kingdom",
+    "GA" : "Gabon",
+    "GN" : "Guinea",
+    "GM" : "Gambia",
+    "GL" : "Greenland",
+    "KW" : "Kuwait",
+//    "GH" : "Ghana",
+    "OM" : "Oman",
+//    "_3" : "Somaliland",
+//    "EH" : "Western Sahara",
+    "xk" : "Kosovo",
+    "_0" : "Northern Cyprus",
+    "JO" : "Jordan",
+    "HR" : "Croatia",
+//    "HT" : "Haiti",
+    "HU" : "Hungary",
+    "HN" : "Honduras",
+    "PR" : "Puerto Rico",
+    "PS" : "West Bank",
+    "PT" : "Portugal",
+    "PY" : "Paraguay",
+    "PA" : "Panama",
+    "PG" : "Papua New Guinea",
+    "PE" : "Peru",
+    "PK" : "Pakistan",
+    "PH" : "Philippines",
+    "PL" : "Poland",
+//    "ZM" : "Zambia",
+    "EE" : "Estonia",
+    "EG" : "Egypt",
+    "ZA" : "South Africa",
+//    "EC" : "Ecuador",
+    "AL" : "Albania",
+//    "AO" : "Angola",
+    "KZ" : "Kazakhstan",
+    "ET" : "Ethiopia",
+    "ZW" : "Zimbabwe",
+    "ES" : "Spain",
+    "ER" : "Eritrea",
+    "ME" : "Montenegro",
+    "MD" : "Moldova",
+    "MG" : "Madagascar",
+    "MA" : "Morocco",
+    "UZ" : "Uzbekistan",
+    "MM" : "Myanmar",
+    "ML" : "Mali",
+    "MN" : "Mongolia",
+    "MK" : "Macedonia",
+    "MW" : "Malawi",
+    "MR" : "Mauritania",
+//    "UG" : "Uganda",
+    "MY" : "Malaysia",
+    "MX" : "Mexico",
+    "VU" : "Vanuatu",
+    "FR" : "France",
+    "FI" : "Finland",
+    "FJ" : "Fiji",
+    "FK" : "Falkland Islands",
+    "NI" : "Nicaragua",
+    "NL" : "Netherlands",
+    "NO" : "Norway",
+    "NA" : "Namibia",
+    "NC" : "New Caledonia",
+//    "NE" : "Niger",
+//    "NG" : "Nigeria",
+    "NZ" : "New Zealand",
+    "NP" : "Nepal",
+    "CI" : "Ivory Coast",
+    "CH" : "Switzerland",
+    "CO" : "Colombia",
+    "CN" : "China",
+    "CM" : "Cameroon",
+    "CL" : "Chile",
+    "CA" : "Canada",
+//    "CG" : "Republic of the Congo",
+//    "CF" : "Central African Republic",
+//    "CD" : "Democratic Republic of the Congo",
+    "CZ" : "Czech Republic",
+    "CY" : "Cyprus",
+    "CR" : "Costa Rica",
+    "CU" : "Cuba",
+    "SZ" : "Swaziland",
+    "SY" : "Syria",
+    "KG" : "Kyrgyzstan",
+//    "KE" : "Kenya",
+//    "SS" : "South Sudan",
+    "SR" : "Suriname",
+    "KH" : "Cambodia",
+    "SV" : "El Salvador",
+    "SK" : "Slovakia",
+    "KR" : "South Korea",
+    "SI" : "Slovenia",
+    "KP" : "North Korea",
+//    "SO" : "Somalia",
+    "SN" : "Senegal",
+    "SL" : "Sierra Leone",
+    "SB" : "Solomon Islands",
+    "SA" : "Saudi Arabia",
+    "SE" : "Sweden",
+    "SD" : "Sudan",
+    "SG" : "Singapore",
+    "DO" : "Dominican Republic",
+    "DJ" : "Djibouti",
+    "DK" : "Denmark",
+    "DE" : "Germany",
+    "YE" : "Yemen",
+    "AT" : "Austria",
+//    "DZ" : "Algeria",
+    "US" : "United States of America",
+    "LV" : "Latvia",
+    "UY" : "Uruguay",
+    "LB" : "Lebanon",
+    "LA" : "Laos",
+    "TW" : "Taiwan",
+    "TT" : "Trinidad and Tobago",
+    "TR" : "Turkey",
+    "LK" : "Sri Lanka",
+    "TN" : "Tunisia",
+    "TL" : "East Timor",
+    "TM" : "Turkmenistan",
+    "TJ" : "Tajikistan",
+    "LS" : "Lesotho",
+    "TH" : "Thailand",
+    "TF" : "French Southern and Antarctic Lands",
+//    "TG" : "Togo",
+//    "TD" : "Chad",
+//    "LY" : "Libya",
+    "AE" : "United Arab Emirates",
+    "VE" : "Venezuela",
+    "AF" : "Afghanistan",
+    "IQ" : "Iraq",
+    "IS" : "Iceland",
+    "IR" : "Iran",
+    "AM" : "Armenia",
+    "IT" : "Italy",
+    "VN" : "Vietnam",
+    "AR" : "Argentina",
+    "AU" : "Australia",
+    "IL" : "Israel",
+    "IN" : "India",
+    "TZ" : "Tanzania",
+    "AZ" : "Azerbaijan",
+    "IE" : "Ireland",
+    "ID" : "Indonesia",
+    "UA" : "Ukraine",
+    "QA" : "Qatar",
+    "MZ" : "Mozambique"
+}
+
+const IndianStateNames = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chandigarh",
+    "Chhattisgarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu and Kashmir",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Ladakh",
+    "Lakshadweep",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Puducherry",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+]
+
+
+const SiteHeader = {
+    logo: '/assets/images/qrcodechimp-icon.svg',
+    logoClass: '',
+    init: function () {
+        SiteHeader.checkAndUpdateHeader()
+        // SiteHeader.insertHeader()
+    },
+    checkAndUpdateHeader: function () {
+        if (isUserLoggedIn()) {
+            $("#nav_dashboard_link").removeClass("d-none")
+            $(".user_profile_header").addClass("loggedIn")
+            $(".user_profile_header .user_profile_icon").html(SiteHeader.getUserProfileIconHtml())
+        } else {
+            $(".user_profile_header").removeClass("loggedIn")
+            $("#nav_dashboard_link").addClass("d-none")
+        }
+    },
+    checkAndUpdateClassName: function () {
+        if (extractDataFromArray(__sidebar_enabled_pages, [page], 0)) {
+            $("#page_header").addClass("bg-white")
+            SiteHeader.logoClass = "d-none"
+        } else {
+            $("#page_header").removeClass("bg-white")
+            SiteHeader.logoClass = ""
+        }
+        SiteHeader.logo = '/assets/images/qrcode-chimp.svg';
+    },
+    insertHeader: function () {
+        $("#page_header").html(`<div class="p-0">
+        <nav class="navbar navbar-expand-md justify-content-between">
+        <div>
+            <a id="sidebarCollapse" class="`+ SiteHeader.isSidebarOpened() + ` header_nav_icon d-none"></a>
+            <a class="navbar-brand" ><img alt="Qr Code Chimp Logo" loading="lazy" class="qr_code_logo_click `+ SiteHeader.logoClass + `" src="` + SiteHeader.logo + `" ></a>
+            </div>
+            <div class=" ml-auto ">
+                <ul class="navbar-nav chimp_header mb-1 mr-4">
+                    `+ SiteHeader.getHeaderNavListHTML() + `
+                </ul>
+            </div>
+            `+ SiteHeader.getUserProfileHtml() + `
+        </nav>
+    </div>`)
+
+    },
+    isSidebarOpened: function () {
+        // Add logic to check cookie and return icon class name either icon-cross or icon-menu
+        return 'icon-cross'
+    },
+    getHeaderNavListHTML: function () {
+        return `<li class="nav-item ` + (page == 'url' ? 'active' : '') + `">
+                    <a class="nav-link" href="/">QR Code Generator</a>
+                </li>
+                <li class="nav-item ` + (page == 'createTemplate' ? 'active' : '') + `">
+                    <a class="nav-link" href="/qr-code-services">Services</a>
+                </li>
+                <li class="nav-item ` + (isUserLoggedIn() ? '' : "d-none") + ' ' + (page == 'dashboard' ? 'active' : '') + `" id="nav_dashboard_link" >
+                    <a class="nav-link" href="/user/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item `+ (page == 'pricing' ? 'active' : '') + `">
+                    <a class="nav-link" href="/pricing">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/articles">Articles</a>
+                </li>
+                <li class="nav-item `+ (page == 'faq' ? 'active' : '') + `">
+                    <a class="nav-link" href="/qr-codes-faq">FAQs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact-us">Contact Us</a>
+                </li>`
+    },
+    getUserProfileHtml: function () {
+        let fname = '', pro_pic = '', sub_account_rec = [];
+        if (isUserLoggedIn()) {
+            fname = extractDataFromArray(user_info, ['fname'], '');
+            pro_pic = extractDataFromArray(user_info, ['user_img'], "/assets/images/profile_pic.svg");
+            sub_account_rec = extractDataFromArray(user_info, ['sub_account_rec'], [])
+            if (!empty(sub_account_rec)) {
+                fname = extractDataFromArray(sub_account_rec, ['name'], '').split(' ')[0]
+            }
+        }
+        return `<div class="user_profile_header ` + (page == 'signin' ? 'd-none' : '') + ` ` + (isUserLoggedIn() ? "loggedIn" : "") + `">
+                    <div class="collapse navbar-collapse login_signup" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto">
+                            
+                        </div>
+                        <div class="form-inline mt-2 mt-md-0">
+                            <button class="btn btn-outline-primary mr-2 pl-4 pr-4" data-toggle="modal"
+                            data-target="#signup-free">Sign In</button>
+                            <button class="btn btn-primary  my-sm-0 pl-4 pr-4" data-toggle="modal"
+                            data-target="#signup-free">Sign Up</button>
+                        </div>
+                    </div>
+                    <div class="ml-auto user_profile_icon">
+                        <div class="navbar_notification easin mr-2 d-none "><i class="icon-notification"></i></div>
+                        <div class=" easin dropdown" >
+                            <button class="dropdown-toggle navbar_profile_pic" id="user_profile_dropdown" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="background-image:url(`+ pro_pic + `)" ></button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_profile_dropdown">
+                                <h6 class="dropdown-header border-bottom">`+ fname + `</h6>
+                                <a class="dropdown-item ` + (!empty(sub_account_rec) ? 'd-none' : '') + `" href="/user/settings?s=profile" id="subaccount_nav_dropdown_link">Profile</a>
+                                <a class="dropdown-item d-none" href="/user/setting">Setting</a>
+                                <div class="dropdown-item" href="" onclick="logout()">Sign Out</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+    },
+    getUserProfileIconHtml: function () {
+        let fname = '', pro_pic = '', sub_account_rec = [];
+        if (isUserLoggedIn()) {
+            fname = extractDataFromArray(user_info, ['fname'], '');
+            pro_pic = extractDataFromArray(user_info, ['user_img'], "/assets/images/profile_pic.svg");
+            sub_account_rec = extractDataFromArray(user_info, ['sub_account_rec'], [])
+            if (!empty(sub_account_rec)) {
+                fname = extractDataFromArray(sub_account_rec, ['name'], '').split(' ')[0]
+            }
+        }
+        return `<div class="navbar_notification easin mr-2 d-none "><i class="icon-notification"></i></div>
+                <div class=" easin dropdown" >
+                    <button class="dropdown-toggle navbar_profile_pic" id="user_profile_dropdown" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="background-image:url(`+ pro_pic + `)" ></button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_profile_dropdown">
+                        <h6 class="dropdown-header border-bottom">`+ fname + `</h6>
+                        <a class="dropdown-item ` + (!empty(sub_account_rec) ? 'd-none' : '') + `" href="/user/settings?s=profile" id="subaccount_nav_dropdown_link">Profile</a>
+                        <a class="dropdown-item d-none" href="/user/setting">Setting</a>
+                        <div class="dropdown-item" href="" onclick="logout()">Sign Out</div>
+                    </div>
+                </div>`
+    }
+
+}
+
+function formUPIurl(data) {
+    let upi_url = 'upi://pay?'
+
+    const vpa = extractDataFromArray(data, ['vpa'], '');
+    if (!empty(vpa)) {
+        upi_url += 'pa=' + vpa + '&'
+    }
+
+    const payee = extractDataFromArray(data, ['payee'], '');
+    if (!empty(payee)) {
+        upi_url += 'pn=' + payee + '&'
+    }
+
+    const amount = extractDataFromArray(data, ['amount'], '');
+    if (!empty(amount)) {
+        upi_url += 'am=' + amount + '&'
+    }
+
+    const currency = extractDataFromArray(data, ['currency'], '');
+    if (!empty(currency)) {
+        upi_url += 'cu=' + currency + '&'
+    }
+
+    const remark = extractDataFromArray(data, ['remark'], '');
+    if (!empty(remark)) {
+        upi_url += 'tn=' + remark + '&'
+    }
+
+    if (upi_url.indexOf('&') == upi_url.length - 1) {
+        upi_url = upi_url.substr(0, upi_url.length - 1)
+    }
+    return upi_url
+
+}
+
+function isComponentBasedUI(qr_type = '') {
+    qr_type = empty(qr_type) ? page : qr_type;
+    return typeof __template_categories !== "undefined" && extractDataFromArray(__template_categories, [qr_type, 'component_based'], 0);
+}
